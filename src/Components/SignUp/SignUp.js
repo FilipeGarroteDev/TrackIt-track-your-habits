@@ -22,7 +22,13 @@ export default function SignUp(){
 
   function sendForm(e){
     e.preventDefault();
-    console.log(signUpData)
+
+    setSignUpData({
+      email: "",
+      name: "",
+      image: "",
+      password: "",
+    })
 
 
   }
@@ -32,10 +38,10 @@ export default function SignUp(){
     <Container>
       <img src={logo} alt="logo"/>
       <Form onSubmit={sendForm}>
-        <input type="email" placeholder="email" name="email" onChange={handleForm}/>
-        <input type="password" placeholder="senha" name="password" onChange={handleForm}/>
-        <input type="text" placeholder="nome" name="name" onChange={handleForm}/>
-        <input type="url" placeholder="foto" name="image" onChange={handleForm}/>
+        <input type="email" placeholder="email" name="email" autoComplete="off" onChange={handleForm} value={signUpData.email}/>
+        <input type="password" placeholder="senha" name="password" autoComplete="off" onChange={handleForm}  value={signUpData.password}/>
+        <input type="text" placeholder="nome" name="name" onChange={handleForm} value={signUpData.name}/>
+        <input type="url" placeholder="foto" name="image" onChange={handleForm} value={signUpData.image}/>
         <button>Entrar</button>
       </Form>
       <SignUpNavigation>

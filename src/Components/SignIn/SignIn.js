@@ -8,8 +8,8 @@ export default function SignIn(){
     <Container>
       <img src={logo} alt="logo"/>
       <Form>
-        <input type="email" placeholder="email"/>
-        <input type="password" placeholder="senha"/>
+        <input type="email" placeholder="email" autoComplete="username" />
+        <input type="password" placeholder="senha" autoComplete="current-password" />
         <button>Entrar</button>
       </Form>
       <SignUpNavigation>
