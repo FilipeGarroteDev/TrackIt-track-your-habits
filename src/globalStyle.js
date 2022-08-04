@@ -51,11 +51,12 @@ const GlobalStyle = createGlobalStyle`
 
   body{
     font-family: 'Lexend Deca', sans-serif;
+    height: 100vh;
   }
 
   .root{
-    height: 100vh;
-    padding: 0 35px;
+    height: 100%;
+    background-color: #E5E5E5;
   }
 `;
 

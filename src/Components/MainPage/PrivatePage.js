@@ -1,7 +1,9 @@
 import { useContext } from "react"
 import { Navigate } from "react-router-dom"
+import styled from "styled-components"
 import UserContext from "../../contexts/UserContext"
 import Header from "./Header"
+import Menu from "./Menu"
 
 export default function PrivatePage({children}){
   const {userData} = useContext(UserContext)
@@ -9,11 +11,11 @@ export default function PrivatePage({children}){
   
   if(userData.token){
     return(
-      <>
-        <Header>
-          {children}
-        </Header>
-      </>
+      <Wrapper>
+        <Header />
+        {children}
+        <Menu />
+      </Wrapper>
     )
   } else {
     return(
@@ -21,3 +23,9 @@ export default function PrivatePage({children}){
     )
   }
 }
+
+const Wrapper = styled.div`
+  height: 100%;
+  width: 100%;
+  padding: 90px 20px;
+`
