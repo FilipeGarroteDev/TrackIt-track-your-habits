@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Bars } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/big-logo.svg"
+import UserContext from "../../contexts/UserContext";
 import { postLogin } from "../../services/trackit";
 import { Form, SignUpNavigation, Container } from "../common";
 
+
 export default function SignIn(){
-  const [signInData, setSignInData] = useState({});
+  const [signInData, setSignInData] = useState({
+    email: "",
+    password: "",
+  });
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
-
-  localStorage.clear();
+  const {setUserData} = useContext(UserContext);
 
   function handleForm(e){
     setSignInData({
@@ -28,7 +32,7 @@ export default function SignIn(){
 
       promise
         .then(res => {
-          localStorage.setItem("hash", JSON.stringify(res.data))
+          setUserData(res.data)
           navigate("/hoje")
         })
         .catch(res => {

@@ -1,9 +1,12 @@
+import { useContext } from "react"
 import { Navigate } from "react-router-dom"
+import UserContext from "../../contexts/UserContext"
 
 export default function PrivatePage({children}){
-  const auth = JSON.parse(localStorage.getItem("hash"))
+  const {userData} = useContext(UserContext)
+  console.log(userData)
   
-  if(auth){
+  if(userData.token){
     return(
       <>
         {children}
@@ -14,5 +17,4 @@ export default function PrivatePage({children}){
       <Navigate to="/" replace />
     )
   }
-
 }
