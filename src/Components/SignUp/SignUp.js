@@ -38,8 +38,7 @@ export default function SignUp(){
         })
         .catch(res => {
           alert(
-          `Ocorreu um erro no cadastro do usuário. Favor tente novamente.
-          - Descrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`
+            `Ocorreu um erro no cadastro do usuário. Favor tente novamente.\n- Descrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`
           );
           setWasSent(false);
         })

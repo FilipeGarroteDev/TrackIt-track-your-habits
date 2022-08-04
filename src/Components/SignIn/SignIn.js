@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Bars } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/big-logo.svg"
 import { postLogin } from "../../services/trackit";
@@ -8,25 +9,39 @@ import { Form, SignUpNavigation } from "../common/Form";
 export default function SignIn(){
   const [signInData, setSignInData] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   function handleForm(e){
     setSignInData({
       ...signInData,
       [e.target.name]: e.target.value,
     })
+    console.log(signInData)
   }
 
   function sendLogin(e){
     e.preventDefault();
-    const navigate = useNavigate();
 
-    if (signInData.email && signInData.password){
+    if (signInData.email && signInData.password && !loggedIn){
       setLoggedIn(true)
-      const promise = postLogin()
+      const promise = postLogin(signInData)
 
       promise
-        .then()
-        .catch()
+        .then(res => {
+          console.log(res.data)
+          navigate("/habitos")
+        })
+        .catch(res => {
+          alert(
+          `Ocorreu um erro no cadastro do usuário. Favor tente novamente.\n- Descrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`
+          )
+          setLoggedIn(false);
+        })
+      
+      setSignInData({
+        email: "",
+        password: ""
+      })
     }
     
   }
@@ -34,7 +49,7 @@ export default function SignIn(){
   return (
     <Container>
       <img src={logo} alt="logo"/>
-      <Form>
+      <Form onSubmit={sendLogin}>
         <input 
           type="email" 
           placeholder="email" 
@@ -53,7 +68,7 @@ export default function SignIn(){
           onChange={handleForm}
           disabled={loggedIn ? true : false}
         />
-        {loggedIn ? <button><Bars heigth={40} width={40} color="white" /></button> : <button>Entrar</button>}
+        {loggedIn ? <button><Bars heigth="40px" width={40} color="white" /></button> : <button>Entrar</button>}
       </Form>
       <SignUpNavigation>
         <Link to="/cadastro">Não tem uma conta? Cadastre-se!</Link>
