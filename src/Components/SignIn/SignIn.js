@@ -29,7 +29,7 @@ export default function SignIn(){
       promise
         .then(res => {
           localStorage.setItem("hash", JSON.stringify(res.data))
-          navigate("/habitos")
+          navigate("/hoje")
         })
         .catch(res => {
           alert(

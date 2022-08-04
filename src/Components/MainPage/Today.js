@@ -1,7 +1,7 @@
 import { postHabit } from "../../services/trackit"
 
 
-export default function Habits(){
+export default function Today(){
   return(
     <>
       <h1>MINHA LINDA PÁGINA!!!!!</h1>

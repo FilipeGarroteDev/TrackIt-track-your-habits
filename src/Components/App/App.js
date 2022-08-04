@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {Reset, GlobalStyle} from "../../globalStyle";
-import Habits from "../MainPage/Habits";
+import PrivatePage from "../MainPage/PrivatePage";
+import Today from "../MainPage/Today";
 import SignIn from "../SignIn/SignIn";
 import SignUp from "../SignUp/SignUp";
 
@@ -13,7 +14,11 @@ export default function App(){
         <Routes>
           <Route path="/" element={<SignIn/>}/>
           <Route path="/cadastro" element={<SignUp/>}/>
-          <Route path="/habitos" element={<Habits/>}/>
+          <Route path="/hoje" element={
+            <PrivatePage>
+              <Today/>
+            </PrivatePage>
+          }/>
         </Routes>
       </BrowserRouter>
     </>
