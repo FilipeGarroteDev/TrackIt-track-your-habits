@@ -11,4 +11,4 @@ function postLogin(body){
   return promise
 }
 
-export {postSignUpData}
+export {postSignUpData, postLogin}

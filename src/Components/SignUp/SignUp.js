@@ -31,18 +31,18 @@ export default function SignUp(){
       setWasSent(true);
       const promise = postSignUpData(signUpData)
 
-      promise.then(res => {
-        alert("O usuário foi criado com sucesso!!");
-        navigate("/")
-      })
-    
-      promise.catch(res => {
-        alert(
-        `Ocorreu um erro no cadastro do usuário. Favor tente novamente.
-        - Descrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`
-        );
-        setWasSent(false);
-      })
+      promise
+        .then(res => {
+          alert("O usuário foi criado com sucesso!!");
+          navigate("/")
+        })
+        .catch(res => {
+          alert(
+          `Ocorreu um erro no cadastro do usuário. Favor tente novamente.
+          - Descrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`
+          );
+          setWasSent(false);
+        })
       
     }
 
