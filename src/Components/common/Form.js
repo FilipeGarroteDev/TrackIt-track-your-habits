@@ -26,6 +26,9 @@ const Form = styled.form`
     border: none;
     border-radius: 4.5px;
     margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `
 
