@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { Navigate } from "react-router-dom"
 import UserContext from "../../contexts/UserContext"
+import Header from "./Header"
 
 export default function PrivatePage({children}){
   const {userData} = useContext(UserContext)
@@ -9,7 +10,9 @@ export default function PrivatePage({children}){
   if(userData.token){
     return(
       <>
-        {children}
+        <Header>
+          {children}
+        </Header>
       </>
     )
   } else {
