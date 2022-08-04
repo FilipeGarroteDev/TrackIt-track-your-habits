@@ -3,8 +3,7 @@ import { Bars } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/big-logo.svg"
 import { postSignUpData } from "../../services/trackit";
-import Container from "../common/Container";
-import { Form, SignUpNavigation } from "../common/Form";
+import { Form, SignUpNavigation, Container } from "../common";
 
 export default function SignUp(){
 

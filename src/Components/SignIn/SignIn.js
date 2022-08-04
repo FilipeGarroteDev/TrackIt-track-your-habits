@@ -3,20 +3,20 @@ import { Bars } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/big-logo.svg"
 import { postLogin } from "../../services/trackit";
-import Container from "../common/Container";
-import { Form, SignUpNavigation } from "../common/Form";
+import { Form, SignUpNavigation, Container } from "../common";
 
 export default function SignIn(){
   const [signInData, setSignInData] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
 
+  localStorage.clear();
+
   function handleForm(e){
     setSignInData({
       ...signInData,
       [e.target.name]: e.target.value,
     })
-    console.log(signInData)
   }
 
   function sendLogin(e){
@@ -28,7 +28,7 @@ export default function SignIn(){
 
       promise
         .then(res => {
-          console.log(res.data)
+          localStorage.setItem("hash", JSON.stringify(res.data))
           navigate("/habitos")
         })
         .catch(res => {
