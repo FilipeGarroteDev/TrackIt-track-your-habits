@@ -8,15 +8,15 @@ import PendingHabit from "./PendingHabit"
 export default function Habits(){
   const [habits, setHabits] = useState([])
   const [createHabit, setCreateHabit] = useState(false)
+  const [refreshList, setRefreshList] = useState(false)
 
   useEffect(() => {
     const promise = getHabits();
 
     promise.then(res => {
       setHabits(res.data)
-      console.log(res.data)
     })
-  }, [])
+  }, [refreshList])
 
   return(
     <>
@@ -24,7 +24,7 @@ export default function Habits(){
         <Title>Meus hábitos</Title>
         <div onClick={() => setCreateHabit(true)}>+</div>
       </TitleContainer>
-      {createHabit ? <PendingHabit setCreateHabit={setCreateHabit}/> : ""}
+      {createHabit ? <PendingHabit setCreateHabit={setCreateHabit} refreshList={refreshList} setRefreshList={setRefreshList}/> : ""}
       {habits.length === 0 ? 
         <Comment>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Comment>
       :

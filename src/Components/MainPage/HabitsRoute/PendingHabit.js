@@ -4,13 +4,11 @@ import styled from "styled-components"
 import { postHabit } from "../../../services/trackit"
 
 
-export default function PendingHabit({setCreateHabit}){
+export default function PendingHabit({setCreateHabit, refreshList, setRefreshList}){
   const week = ["Q", "S", "T", "Q", "Q", "S", "S"]
   const [habitName, setHabitName] = useState("")
   const [days, setDays] = useState([])
   const [savedHabit, setSavedHabit] = useState(false)
-
-  console.log(days)
 
   function sendHabit(){
     setSavedHabit(true)
@@ -22,6 +20,7 @@ export default function PendingHabit({setCreateHabit}){
     const promise = postHabit(habitObject);
     promise.then(res => {
       setCreateHabit(false)
+      setRefreshList(!refreshList)
     })
   }
 
@@ -84,6 +83,7 @@ const HabitCard = styled.div`
   background-color: white;
   border-radius: 5px;
   padding: 18px;
+  margin-bottom: 15px;
 
   input{
     width: 100%;
