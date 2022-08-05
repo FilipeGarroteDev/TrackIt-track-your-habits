@@ -34,8 +34,11 @@ const Form = styled.form`
 `
 
 const SignUpNavigation = styled.span`
-  a{
-    font-size: 14px;
+  font-size: 14px;
+  color: #52b6ff;
+  text-decoration: underline;
+
+  a:visited{
     color: #52b6ff;
   }
 `

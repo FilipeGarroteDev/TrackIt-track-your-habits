@@ -2,10 +2,10 @@ import axios from "axios";
 const BASE_URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit"
 
 function createToken(){
-  const auth = JSON.parse(localStorage.getItem("hash"))
+  const auth = localStorage.getItem("hash")
   const config = {
     headers: {
-      Authorization: `Bearer ${auth.token}`
+      Authorization: `Bearer ${auth}`
     }
   }
 
@@ -18,7 +18,13 @@ function postSignUpData(body){
 }
 
 function postLogin(body){
-  const promise = axios.post (`${BASE_URL}/auth/login`, body)
+  const promise = axios.post (`${BASE_URL}/auth/login`, body);
+  return promise
+}
+
+function getHabits(){
+  const config = createToken();
+  const promise = axios.get (`${BASE_URL}/habits`, config);
   return promise
 }
 
@@ -27,4 +33,4 @@ function postHabit(){
   console.log(config)
 }
 
-export {postSignUpData, postLogin, postHabit}
+export {postSignUpData, postLogin, postHabit, getHabits}

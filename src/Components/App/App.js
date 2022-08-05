@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
 import {Reset, GlobalStyle} from "../../globalStyle";
+import Habits from "../MainPage/Habits";
 import PrivatePage from "../MainPage/PrivatePage";
 import Today from "../MainPage/Today";
 import SignIn from "../SignIn/SignIn";
@@ -22,6 +23,11 @@ export default function App(){
             <Route path="/hoje" element={
               <PrivatePage>
                 <Today/>
+              </PrivatePage>
+            }/>
+            <Route path="/habitos" element={
+              <PrivatePage>
+                <Habits/>
               </PrivatePage>
             }/>
           </Routes>

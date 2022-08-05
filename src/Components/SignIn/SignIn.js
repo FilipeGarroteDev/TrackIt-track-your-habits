@@ -7,7 +7,10 @@ import { postLogin } from "../../services/trackit";
 import { Form, SignUpNavigation, Container } from "../common";
 
 
+
 export default function SignIn(){
+
+ 
   const [signInData, setSignInData] = useState({
     email: "",
     password: "",
@@ -15,6 +18,7 @@ export default function SignIn(){
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
   const {setUserData} = useContext(UserContext);
+
 
   function handleForm(e){
     setSignInData({
@@ -32,6 +36,7 @@ export default function SignIn(){
 
       promise
         .then(res => {
+          localStorage.setItem("hash", res.data.token)
           setUserData(res.data)
           navigate("/hoje")
         })

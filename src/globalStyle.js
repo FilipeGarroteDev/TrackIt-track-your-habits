@@ -47,6 +47,7 @@ const GlobalStyle = createGlobalStyle`
   *{
     font-family: 'Lexend Deca', sans-serif;
     box-sizing: border-box;
+    text-decoration: none;
   }
 
   body{
