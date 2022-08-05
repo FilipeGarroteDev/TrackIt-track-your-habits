@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import { getHabits } from "../../../services/trackit"
+import { Comment, Title } from "../../common"
 import CreatedHabit from "./CreatedHabit"
 import PendingHabit from "./PendingHabit"
 
@@ -32,7 +33,7 @@ export default function Habits(){
       {habits.length === 0 ? 
         <Comment>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Comment>
       :
-        habits.map((({name, days, id}) => <CreatedHabit name={name} days={days} id={id} refreshList={refreshList} setRefreshList={setRefreshList}/>))  }
+        habits.map((({name, days, id}) => <CreatedHabit key={id} name={name} days={days} id={id} refreshList={refreshList} setRefreshList={setRefreshList}/>))  }
     </>
   )
 }
@@ -57,15 +58,4 @@ const TitleContainer = styled.div`
   }
 `
 
-const Title = styled.h2`
-  font-size: 23px;
-  color: #126BA5;
-`
-
-const Comment = styled.span`
-  font-size: 18px;
-  color: #666666;
-  display: block;
-  margin-top: 30px;
-`
 

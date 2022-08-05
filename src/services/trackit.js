@@ -40,4 +40,10 @@ function removeHabit(id){
   return promise;
 }
 
-export {postSignUpData, postLogin, postHabit, getHabits, removeHabit}
+function getTodayHabits(){
+  const config = createToken();
+  const promise = axios.get(`${BASE_URL}/habits/today`, config)
+  return promise
+}
+
+export {postSignUpData, postLogin, postHabit, getHabits, removeHabit, getTodayHabits}

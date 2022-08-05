@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { removeHabit } from "../../../services/trackit"
 
 export default function CreatedHabit({name, days, id, refreshList, setRefreshList }){
-  const week = ["Q", "S", "T", "Q", "Q", "S", "S"]
+  const week = ["D", "S", "T", "Q", "Q", "S", "S"]
 
   function deleteHabit(){
     if(window.confirm("Você tem certeza que quer deletar esse hábito?")){

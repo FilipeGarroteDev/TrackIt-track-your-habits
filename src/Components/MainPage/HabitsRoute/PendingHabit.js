@@ -5,7 +5,7 @@ import { postHabit } from "../../../services/trackit"
 
 
 export default function PendingHabit({setCreateHabit, refreshList, setRefreshList, habitName, setHabitName, days, setDays}){
-  const week = ["Q", "S", "T", "Q", "Q", "S", "S"]
+  const week = ["D", "S", "T", "Q", "Q", "S", "S"]
   const [savedHabit, setSavedHabit] = useState(false)
 
   function sendHabit(){
