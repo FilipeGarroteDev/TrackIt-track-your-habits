@@ -34,4 +34,10 @@ function postHabit(body){
   return promise;
 }
 
-export {postSignUpData, postLogin, postHabit, getHabits}
+function removeHabit(id){
+  const config = createToken();
+  const promise = axios.delete(`${BASE_URL}/habits/${id}`, config)
+  return promise;
+}
+
+export {postSignUpData, postLogin, postHabit, getHabits, removeHabit}

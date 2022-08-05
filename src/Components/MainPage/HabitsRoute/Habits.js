@@ -24,7 +24,7 @@ export default function Habits(){
         <Title>Meus hábitos</Title>
         <div onClick={() => setCreateHabit(true)}>+</div>
       </TitleContainer>
-      {createHabit ? <PendingHabit setCreateHabit={setCreateHabit} refreshList={refreshList} setRefreshList={setRefreshList}/> : ""}
+      {createHabit ? <PendingHabit habits={habits} setHabits={setHabits} setCreateHabit={setCreateHabit} refreshList={refreshList} setRefreshList={setRefreshList}/> : ""}
       {habits.length === 0 ? 
         <Comment>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Comment>
       :

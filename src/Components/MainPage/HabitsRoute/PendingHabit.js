@@ -4,24 +4,34 @@ import styled from "styled-components"
 import { postHabit } from "../../../services/trackit"
 
 
-export default function PendingHabit({setCreateHabit, refreshList, setRefreshList}){
+export default function PendingHabit({setCreateHabit, refreshList, setRefreshList, habits, setHabits}){
   const week = ["Q", "S", "T", "Q", "Q", "S", "S"]
   const [habitName, setHabitName] = useState("")
   const [days, setDays] = useState([])
   const [savedHabit, setSavedHabit] = useState(false)
 
   function sendHabit(){
-    setSavedHabit(true)
+
+    if (days.length === 0){
+      alert("Você precisa selecionar pelo menos um dia da semana.")
+    } else {
+      setSavedHabit(true)
     const habitObject = {
       name: habitName,
       days
     }
 
     const promise = postHabit(habitObject);
-    promise.then(res => {
-      setCreateHabit(false)
-      setRefreshList(!refreshList)
-    })
+    promise
+      .then(res => {
+        setCreateHabit(false)
+        setRefreshList(!refreshList)
+      })
+      .catch(res => {
+        alert(`Não foi possível enviar seu hábito.Tente novamente.\nDescrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`)
+        setSavedHabit(false)
+      })
+    }    
   }
 
 
