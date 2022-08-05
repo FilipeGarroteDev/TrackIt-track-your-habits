@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import { getHabits } from "../../../services/trackit"
+import CreatedHabit from "./CreatedHabit"
 import PendingHabit from "./PendingHabit"
 
 
@@ -27,7 +28,7 @@ export default function Habits(){
       {habits.length === 0 ? 
         <Comment>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Comment>
       :
-        habits.map((habit => console.log("tem hábito...estranho, né?")))  }
+        habits.map((({name, days}) => <CreatedHabit name={name} days={days}/>))  }
     </>
   )
 }

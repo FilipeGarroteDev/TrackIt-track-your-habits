@@ -58,7 +58,7 @@ export default function SignIn(){
   return (
     <Container>
       <img src={logo} alt="logo"/>
-      <Form onSubmit={sendLogin}>
+      <Form onSubmit={sendLogin} loggedIn={loggedIn}>
         <input 
           type="email" 
           placeholder="email" 

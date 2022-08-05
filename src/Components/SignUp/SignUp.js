@@ -55,7 +55,7 @@ export default function SignUp(){
   return (
     <Container>
       <img src={logo} alt="logo"/>
-      <Form onSubmit={sendForm}>
+      <Form onSubmit={sendForm} wasSent={wasSent}>
         <input 
           type="email" 
           placeholder="email" 

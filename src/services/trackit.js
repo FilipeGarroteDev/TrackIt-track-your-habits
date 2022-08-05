@@ -28,9 +28,10 @@ function getHabits(){
   return promise
 }
 
-function postHabit(){
+function postHabit(body){
   const config = createToken();
-  console.log(config)
+  const promise = axios.post(`${BASE_URL}/habits`, body, config);
+  return promise;
 }
 
 export {postSignUpData, postLogin, postHabit, getHabits}

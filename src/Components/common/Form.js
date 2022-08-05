@@ -21,8 +21,8 @@ const Form = styled.form`
 
   button{
     height: 45px;
-    background-color: #52b6ff;
     color: #ffffff;
+    background-color: ${props => props.loggedIn || props.wasSent ? "#86CCFF" : "#52b6ff"};
     font-size: 20px;
     border: none;
     border-radius: 4.5px;

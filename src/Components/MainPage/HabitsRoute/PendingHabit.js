@@ -1,14 +1,28 @@
 import { useState } from "react"
+import { Bars } from "react-loader-spinner"
 import styled from "styled-components"
+import { postHabit } from "../../../services/trackit"
 
 
 export default function PendingHabit({setCreateHabit}){
   const week = ["Q", "S", "T", "Q", "Q", "S", "S"]
   const [habitName, setHabitName] = useState("")
   const [days, setDays] = useState([])
+  const [savedHabit, setSavedHabit] = useState(false)
+
+  console.log(days)
 
   function sendHabit(){
-    
+    setSavedHabit(true)
+    const habitObject = {
+      name: habitName,
+      days
+    }
+
+    const promise = postHabit(habitObject);
+    promise.then(res => {
+      setCreateHabit(false)
+    })
   }
 
 
@@ -19,48 +33,51 @@ export default function PendingHabit({setCreateHabit}){
         placeholder="nome do hábito"
         value={habitName}
         onChange={e => setHabitName(e.target.value)}
+        disabled={savedHabit ? true : false}
       />
       <WeekContainer>
-        {week.map((day, index) => <Day key={index} day={day} setDays={setDays} days={days} index={index}/>)}
+        {week.map((day, index) => <Day key={index} day={day} setDays={setDays} days={days} index={index} savedHabit={savedHabit}/>)}
       </WeekContainer>
-      <Buttons>
+      <Buttons savedHabit={savedHabit}>
         <span onClick={() => setCreateHabit(false)}>Cancelar</span>
-        <button onClick={sendHabit}>Salvar</button>
+        {savedHabit ? <button><Bars width={30} color="white" /></button> : <button onClick={sendHabit}>Salvar</button>}
+
       </Buttons>
     </HabitCard>
   )
 }
 
-function Day({day, setDays, days, index}){
+function Day({day, setDays, days, index, savedHabit}){
   const [selectedDay, setSelectedDay] = useState(false)
 
   function handleDays(){
     setSelectedDay(!selectedDay)
     const aux = days.filter(value => value === index)
 
-    if(!selectedDay){
-      if(aux.length === 0){
-        setDays([
-          ...days,
-          index
-        ])
+    if(!savedHabit){
+      if(!selectedDay){
+        if(aux.length === 0){
+          setDays([
+            ...days,
+            index
+          ])
+        }
+      } else {
+        const indexAux = days.findIndex(value => value === aux[0]);
+        const filteredDays = days.filter((value, index) => index !== indexAux)
+        setDays(filteredDays)
       }
-    } else {
-      const indexAux = days.findIndex(value => value === aux[0]);
-      const filteredDays = days.filter((value, index) => index !== indexAux)
-      setDays(filteredDays)
     }
+    
   }
 
   return (
     <>
-      <StyledDay selectedDay={selectedDay} onClick={handleDays}>{day}</StyledDay>
+      <StyledDay selectedDay={selectedDay} savedHabit={savedHabit} onClick={handleDays}>{day}</StyledDay>
     </>
   )
 
 }
-
-
 
 const HabitCard = styled.div`
   height: 180px;
@@ -101,6 +118,7 @@ const StyledDay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: ${props => props.savedHabit ? "0.5" : "initial"};
 
 `
 
@@ -119,9 +137,12 @@ const Buttons = styled.div`
     width: 84px;
     height: 35px;
     border: none;
-    background-color: #52B6FF;
+    background-color: ${props => props.savedHabit ? "#86CCFF" : "#52B6FF"};
     border-radius: 5px;
     color: #FFFFFF;
     font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `
