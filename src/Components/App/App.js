@@ -4,7 +4,7 @@ import UserContext from "../../contexts/UserContext";
 import {Reset, GlobalStyle} from "../../globalStyle";
 import Habits from "../MainPage/HabitsRoute/Habits";
 import PrivatePage from "../MainPage/PrivatePage";
-import Today from "../MainPage/Today";
+import Today from "../MainPage/TodayRoute/Today";
 import SignIn from "../SignIn/SignIn";
 import SignUp from "../SignUp/SignUp";
 

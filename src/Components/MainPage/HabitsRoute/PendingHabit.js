@@ -4,10 +4,8 @@ import styled from "styled-components"
 import { postHabit } from "../../../services/trackit"
 
 
-export default function PendingHabit({setCreateHabit, refreshList, setRefreshList, habits, setHabits}){
+export default function PendingHabit({setCreateHabit, refreshList, setRefreshList, habitName, setHabitName, days, setDays}){
   const week = ["Q", "S", "T", "Q", "Q", "S", "S"]
-  const [habitName, setHabitName] = useState("")
-  const [days, setDays] = useState([])
   const [savedHabit, setSavedHabit] = useState(false)
 
   function sendHabit(){
@@ -16,21 +14,23 @@ export default function PendingHabit({setCreateHabit, refreshList, setRefreshLis
       alert("Você precisa selecionar pelo menos um dia da semana.")
     } else {
       setSavedHabit(true)
-    const habitObject = {
-      name: habitName,
-      days
-    }
+      const habitObject = {
+        name: habitName,
+        days
+      }
 
-    const promise = postHabit(habitObject);
-    promise
-      .then(res => {
-        setCreateHabit(false)
-        setRefreshList(!refreshList)
-      })
-      .catch(res => {
-        alert(`Não foi possível enviar seu hábito.Tente novamente.\nDescrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`)
-        setSavedHabit(false)
-      })
+      const promise = postHabit(habitObject);
+      promise
+        .then(res => {
+          setCreateHabit(false);
+          setHabitName("");
+          setDays([]);
+          setRefreshList(!refreshList);
+        })
+        .catch(res => {
+          alert(`Não foi possível enviar seu hábito.Tente novamente.\nDescrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`)
+          setSavedHabit(false)
+        })
     }    
   }
 
@@ -45,10 +45,10 @@ export default function PendingHabit({setCreateHabit, refreshList, setRefreshLis
         disabled={savedHabit ? true : false}
       />
       <WeekContainer>
-        {week.map((day, index) => <Day key={index} day={day} setDays={setDays} days={days} index={index} savedHabit={savedHabit}/>)}
+        {week.map((day, index) => days.includes(index) ? <Day key={index} day={day} setDays={setDays} days={days} index={index} savedHabit={savedHabit} color="white" background ="#cfcfcf"/> : <Day key={index} day={day} setDays={setDays} days={days} index={index} savedHabit={savedHabit}/>)}
       </WeekContainer>
       <Buttons savedHabit={savedHabit}>
-        <span onClick={() => setCreateHabit(false)}>Cancelar</span>
+        <span onClick={() => {setCreateHabit(false)}}>Cancelar</span>
         {savedHabit ? <button><Bars width={30} color="white" /></button> : <button onClick={sendHabit}>Salvar</button>}
 
       </Buttons>
@@ -56,15 +56,15 @@ export default function PendingHabit({setCreateHabit, refreshList, setRefreshLis
   )
 }
 
-function Day({day, setDays, days, index, savedHabit}){
-  const [selectedDay, setSelectedDay] = useState(false)
+function Day({day, setDays, days, index, savedHabit, color, background}){
+  const [isClicked, setIsClicked] = useState(false)
 
   function handleDays(){
-    setSelectedDay(!selectedDay)
     const aux = days.filter(value => value === index)
+    setIsClicked(!isClicked)
 
     if(!savedHabit){
-      if(!selectedDay){
+      if(!color){
         if(aux.length === 0){
           setDays([
             ...days,
@@ -77,12 +77,11 @@ function Day({day, setDays, days, index, savedHabit}){
         setDays(filteredDays)
       }
     }
-    
   }
 
   return (
     <>
-      <StyledDay selectedDay={selectedDay} savedHabit={savedHabit} onClick={handleDays}>{day}</StyledDay>
+      <StyledDay color={color} background={background} isClicked={isClicked} savedHabit={savedHabit} onClick={handleDays}>{day}</StyledDay>
     </>
   )
 
@@ -122,8 +121,8 @@ const StyledDay = styled.div`
   height: 30px;
   border: 1px solid #D4D4D4;
   border-radius: 5px;
-  color: ${(props) => props.selectedDay ? "white" : "#dbdbdb"};
-  background-color: ${(props) => props.selectedDay ? "#cfcfcf" : "white"};
+  color: ${(props) => props.color ? props.color : "#dbdbdb"};
+  background-color: ${(props) => props.background ? props.background : "white"};
   font-size: 20px;
   display: flex;
   justify-content: center;

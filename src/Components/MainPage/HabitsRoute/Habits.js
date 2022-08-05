@@ -8,7 +8,11 @@ import PendingHabit from "./PendingHabit"
 export default function Habits(){
   const [habits, setHabits] = useState([])
   const [createHabit, setCreateHabit] = useState(false)
-  const [refreshList, setRefreshList] = useState(false)
+  const [refreshList, setRefreshList] = useState(false);
+  const [habitName, setHabitName] = useState("");
+  const [days, setDays] = useState([])
+
+  console.log(days)
 
   useEffect(() => {
     const promise = getHabits();
@@ -24,11 +28,11 @@ export default function Habits(){
         <Title>Meus hábitos</Title>
         <div onClick={() => setCreateHabit(true)}>+</div>
       </TitleContainer>
-      {createHabit ? <PendingHabit habits={habits} setHabits={setHabits} setCreateHabit={setCreateHabit} refreshList={refreshList} setRefreshList={setRefreshList}/> : ""}
+      {createHabit ? <PendingHabit setCreateHabit={setCreateHabit} refreshList={refreshList} setRefreshList={setRefreshList} habitName={habitName} setHabitName={setHabitName} days={days} setDays={setDays}/> : ""}
       {habits.length === 0 ? 
         <Comment>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Comment>
       :
-        habits.map((({name, days}) => <CreatedHabit name={name} days={days}/>))  }
+        habits.map((({name, days, id}) => <CreatedHabit name={name} days={days} id={id} refreshList={refreshList} setRefreshList={setRefreshList}/>))  }
     </>
   )
 }

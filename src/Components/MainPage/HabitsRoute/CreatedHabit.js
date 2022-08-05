@@ -1,7 +1,17 @@
 import styled from "styled-components"
+import { removeHabit } from "../../../services/trackit"
 
-export default function CreatedHabit({name, days}){
+export default function CreatedHabit({name, days, id, refreshList, setRefreshList }){
   const week = ["Q", "S", "T", "Q", "Q", "S", "S"]
+
+  function deleteHabit(){
+    if(window.confirm("Você tem certeza que quer deletar esse hábito?")){
+      const promise = removeHabit(id)
+      promise.then(res => {
+        setRefreshList(!refreshList)
+      })
+    }
+  }
 
   return (
     <HabitCard>
@@ -9,7 +19,7 @@ export default function CreatedHabit({name, days}){
       <WeekContainer>
         {week.map((day, index) => days.includes(index) ? <StyledDay key={index} selected={true}>{day}</StyledDay> : <StyledDay key={index} selected={false}>{day}</StyledDay> )}
       </WeekContainer>
-      <ion-icon name="trash-outline"></ion-icon>
+      <ion-icon onClick={deleteHabit} name="trash-outline"></ion-icon>
     </HabitCard>
   )
 }
