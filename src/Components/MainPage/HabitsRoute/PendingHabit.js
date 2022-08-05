@@ -4,27 +4,57 @@ import styled from "styled-components"
 
 export default function PendingHabit({setCreateHabit}){
   const week = ["Q", "S", "T", "Q", "Q", "S", "S"]
+  const [habitName, setHabitName] = useState("")
+  const [days, setDays] = useState([])
+
+  function sendHabit(){
+    
+  }
+
 
   return(
     <HabitCard>
-      <input type="text" placeholder="nome do hábito"/>
+      <input 
+        type="text" 
+        placeholder="nome do hábito"
+        value={habitName}
+        onChange={e => setHabitName(e.target.value)}
+      />
       <WeekContainer>
-        {week.map((day, index) => <Day key={index} day={day} />)}
+        {week.map((day, index) => <Day key={index} day={day} setDays={setDays} days={days} index={index}/>)}
       </WeekContainer>
       <Buttons>
         <span onClick={() => setCreateHabit(false)}>Cancelar</span>
-        <button>Salvar</button>
+        <button onClick={sendHabit}>Salvar</button>
       </Buttons>
     </HabitCard>
   )
 }
 
-function Day({day}){
+function Day({day, setDays, days, index}){
   const [selectedDay, setSelectedDay] = useState(false)
+
+  function handleDays(){
+    setSelectedDay(!selectedDay)
+    const aux = days.filter(value => value === index)
+
+    if(!selectedDay){
+      if(aux.length === 0){
+        setDays([
+          ...days,
+          index
+        ])
+      }
+    } else {
+      const indexAux = days.findIndex(value => value === aux[0]);
+      const filteredDays = days.filter((value, index) => index !== indexAux)
+      setDays(filteredDays)
+    }
+  }
 
   return (
     <>
-      <StyledDay selectedDay={selectedDay} onClick={() => setSelectedDay(!selectedDay)}>{day}</StyledDay>
+      <StyledDay selectedDay={selectedDay} onClick={handleDays}>{day}</StyledDay>
     </>
   )
 
