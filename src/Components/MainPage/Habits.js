@@ -5,6 +5,7 @@ import { getHabits } from "../../services/trackit"
 
 export default function Habits(){
   const [habits, setHabits] = useState([])
+  const [createHabit, setCreateHabit] = useState(false)
 
   useEffect(() => {
     const promise = getHabits();
@@ -19,9 +20,9 @@ export default function Habits(){
     <>
       <TitleContainer>
         <Title>Meus hábitos</Title>
-        <div>+</div>
+        <div onClick={() => setCreateHabit(true)}>+</div>
       </TitleContainer>
-      <PendingHabit />
+      {createHabit ? <PendingHabit setCreateHabit={setCreateHabit}/> : ""}
       {habits.length === 0 ? 
         <Comment>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Comment>
       :
@@ -31,7 +32,7 @@ export default function Habits(){
 
 }
 
-function PendingHabit(){
+function PendingHabit({setCreateHabit}){
   const week = ["Q", "S", "T", "Q", "Q", "S", "S"]
 
   return(
@@ -41,7 +42,7 @@ function PendingHabit(){
         {week.map(day => <div>{day}</div>)}
       </WeekContainer>
       <Buttons>
-        <span>Cancelar</span>
+        <span onClick={() => setCreateHabit(false)}>Cancelar</span>
         <button>Salvar</button>
       </Buttons>
     </HabitCard>
