@@ -2,20 +2,28 @@ import styled from "styled-components"
 import { getTodayHabits, removeHabit } from "../../../services/trackit"
 import ProgressContext from "../../../contexts/ProgressContext"
 import { useContext } from "react"
+import { useNavigate } from "react-router-dom"
+
 
 export default function CreatedHabit({name, days, id, refreshList, setRefreshList }){
   const week = ["D", "S", "T", "Q", "Q", "S", "S"]
   const {setTodaysHabits} = useContext(ProgressContext)
+  const navigate = useNavigate()
 
   function deleteHabit(){
     if(window.confirm("Você tem certeza que quer deletar esse hábito?")){
       const promise = removeHabit(id)
-      promise.then(res => {
+      promise
+        .then(res => {
         setRefreshList(!refreshList)
         //PROMISE PARA ATUALIZAR O PROGRESSO DO BOTÃO CIRCULAR
         const promise = getTodayHabits();
         promise.then(res => setTodaysHabits(res.data))
       })
+        .catch(res => {
+          alert(`Aconteceu um erro inesperado!\nDescrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`)
+          navigate("/")
+        })
     }
   }
 

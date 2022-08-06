@@ -7,6 +7,7 @@ import { getTodayHabits } from "../../../services/trackit"
 import { Comment, Title } from "../../common"
 import TodaysHabit from "./TodaysHabit"
 import ProgressContext from "../../../contexts/ProgressContext"
+import { useNavigate } from "react-router-dom"
 
 
 export default function Today(){
@@ -14,6 +15,7 @@ export default function Today(){
   dayjs.updateLocale('pt-br', {weekdays: ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"]})
   const date = dayjs().locale("pt-br").format("dddd, DD/MM");
   const {todaysHabits, setTodaysHabits, reloadHabits, setReloadHabits} = useContext(ProgressContext)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const promise = getTodayHabits();
@@ -25,6 +27,7 @@ export default function Today(){
         alert(
           `Ocorreu um erro na requisição. Favor tente novamente.\n- Descrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`
         )
+        navigate("/")
       })
 
   }, [reloadHabits, setTodaysHabits])

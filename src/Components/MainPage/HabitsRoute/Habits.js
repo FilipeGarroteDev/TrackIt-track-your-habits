@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
-import { getHabits } from "../../../services/trackit"
+import { blockToken, getHabits } from "../../../services/trackit"
 import { Comment, Title } from "../../common"
 import CreatedHabit from "./CreatedHabit"
 import PendingHabit from "./PendingHabit"
@@ -12,15 +13,21 @@ export default function Habits(){
   const [refreshList, setRefreshList] = useState(false);
   const [habitName, setHabitName] = useState("");
   const [days, setDays] = useState([])
+  const navigate = useNavigate()
 
   console.log(days)
 
   useEffect(() => {
     const promise = getHabits();
 
-    promise.then(res => {
+    promise
+      .then(res => {
       setHabits(res.data)
     })
+      .catch(res => {
+        alert(`Aconteceu um erro inesperado!\nDescrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`)
+        navigate("/")
+      })
   }, [refreshList])
 
   return(

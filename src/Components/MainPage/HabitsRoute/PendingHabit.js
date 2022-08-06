@@ -1,5 +1,6 @@
 import {  useContext, useState } from "react"
 import { Bars } from "react-loader-spinner"
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import ProgressContext from "../../../contexts/ProgressContext"
 import { getTodayHabits, postHabit } from "../../../services/trackit"
@@ -8,6 +9,7 @@ export default function PendingHabit({setCreateHabit, refreshList, setRefreshLis
   const week = ["D", "S", "T", "Q", "Q", "S", "S"]
   const [savedHabit, setSavedHabit] = useState(false)
   const {setTodaysHabits} = useContext(ProgressContext)
+  const navigate = useNavigate()
 
   function sendHabit(){
 
@@ -34,6 +36,7 @@ export default function PendingHabit({setCreateHabit, refreshList, setRefreshLis
         .catch(res => {
           alert(`Não foi possível enviar seu hábito.Tente novamente.\nDescrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`)
           setSavedHabit(false)
+          navigate("/")
         })
     }    
   }

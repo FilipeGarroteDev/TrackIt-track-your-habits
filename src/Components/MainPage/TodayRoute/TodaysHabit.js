@@ -3,24 +3,34 @@ import { useContext } from "react"
 import styled from "styled-components"
 import { postCompletedHabit, postUncompletedHabit } from "../../../services/trackit"
 import ProgressContext from "../../../contexts/ProgressContext"
+import { useNavigate } from "react-router-dom"
 
 
 export default function TodaysHabit({name, id, done, currentSequence, highestSequence, color}){
   const {todaysHabits, reloadHabits, setReloadHabits} = useContext(ProgressContext)
+  const navigate = useNavigate()
 
   function checkHabit(){
     if(done){
       const promise = postUncompletedHabit(todaysHabits, id);
-      promise.then(res => {
-        setReloadHabits(!reloadHabits)
-      })
-        .catch(res => console.log("erro"))
+      promise
+        .then(res => {
+          setReloadHabits(!reloadHabits)
+        })
+        .catch(res => {
+          alert(`Aconteceu um erro inesperado!\nDescrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`)
+          navigate("/")
+        })
     } else {
       const promise = postCompletedHabit(todaysHabits, id);
-      promise.then(res => {
-        setReloadHabits(!reloadHabits)
-      })
-        .catch(res => console.log("erro"))
+      promise
+        .then(res => {
+          setReloadHabits(!reloadHabits)
+        })
+        .catch(res => {
+          alert(`Aconteceu um erro inesperado!\nDescrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`)
+          navigate("/")
+        })
     }
   }
 

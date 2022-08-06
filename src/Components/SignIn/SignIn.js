@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Bars } from "react-loader-spinner";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import logo from "../../assets/images/big-logo.svg"
 import UserContext from "../../contexts/UserContext";
 import { postLogin } from "../../services/trackit";
@@ -9,7 +9,6 @@ import { Form, SignUpNavigation, Container } from "../common";
 
 
 export default function SignIn(){
-
  
   const [signInData, setSignInData] = useState({
     email: "",
@@ -18,6 +17,11 @@ export default function SignIn(){
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
   const {setUserData} = useContext(UserContext);
+
+  // if(localStorage.length > 0){
+  //   return(<Navigate to="/hoje" replace/>)
+   
+  // }
 
 
   function handleForm(e){
