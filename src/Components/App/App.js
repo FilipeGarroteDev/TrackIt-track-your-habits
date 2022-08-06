@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ProgressContext from "../../contexts/ProgressContext";
 import UserContext from "../../contexts/UserContext";
 import {Reset, GlobalStyle} from "../../globalStyle";
 import Habits from "../MainPage/HabitsRoute/Habits";
@@ -10,10 +11,13 @@ import SignUp from "../SignUp/SignUp";
 
 export default function App(){
   const [userData, setUserData] = useState({})
+  const [checkedHabits, setCheckedHabits] = useState([])
+  const [todaysHabits, setTodaysHabits] = useState([])
 
   return (
     <>
       <UserContext.Provider value={{userData, setUserData}}>
+      <ProgressContext.Provider value={{todaysHabits, setTodaysHabits, checkedHabits, setCheckedHabits}}>
         <Reset />
         <GlobalStyle/>
         <BrowserRouter>
@@ -22,7 +26,7 @@ export default function App(){
             <Route path="/cadastro" element={<SignUp/>}/>
             <Route path="/hoje" element={
               <PrivatePage>
-                <Today/>
+                <Today />
               </PrivatePage>
             }/>
             <Route path="/habitos" element={
@@ -32,6 +36,7 @@ export default function App(){
             }/>
           </Routes>
         </BrowserRouter>
+      </ProgressContext.Provider>
       </UserContext.Provider>
     </>
   )
