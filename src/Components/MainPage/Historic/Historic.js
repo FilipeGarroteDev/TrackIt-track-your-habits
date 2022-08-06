@@ -10,14 +10,33 @@ import "dayjs/locale/pt-br"
 export default function Historic(){
   const [date, setDate] = useState(new Date());
   const [habitsHistoric, setHabitsHistoric] = useState([]);
+  const [daysWithHabits, setDaysWithHabits] = useState([])
 
 
   useEffect(() => {
     const promise = getHistoric();
     promise.then(res => {
       setHabitsHistoric(res.data)
+      const aux = res.data.map(habit => habit.day)
+      setDaysWithHabits(aux)
     })
   }, [])
+
+  function tileClassName({date, view}){
+    if(view === "month"){
+      const calendarDay = dayjs(date).format("DD/MM/YYYY");
+      const today = dayjs().format("DD/MM/YYYY");
+      if(daysWithHabits.includes(calendarDay) && calendarDay !== today){
+        const currentDayIndex = habitsHistoric.findIndex(day => day.day === calendarDay)
+        const hasFalse = habitsHistoric[currentDayIndex].habits.map(habit => !habit.done);
+        if(hasFalse.length === 0){
+          return "successed"
+        } else {
+          return "failed"
+        }
+      }
+    }
+  }
 
   return(
     <>
@@ -29,6 +48,7 @@ export default function Historic(){
           onChange={setDate} 
           date={date}
           formatDay={(locale, date) => dayjs(date).format("DD")}
+          tileClassName={tileClassName}
         />
       </CalendarWrapper>
     </>
@@ -71,6 +91,16 @@ const CalendarWrapper = styled.div`
 .react-calendar__tile--now {
   background: #ffff76;
   clip-path: circle();
+}
+
+.successed{
+  clip-path: circle();
+  background-color: #8CC654;
+}
+
+.failed{
+  clip-path: circle();
+  background-color: #EA5766;
 }
 
 `
