@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 import { Comment, Title } from "../../common"
 
 

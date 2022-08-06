@@ -8,7 +8,7 @@ import Menu from "./Menu"
 export default function PrivatePage({children}){
   const {userData} = useContext(UserContext)
   
-  if(localStorage.getItem("hash")){
+  if(localStorage.getItem("hash") && userData.token){
     return(
       <Wrapper>
         <Header />

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
-import { blockToken, getHabits } from "../../../services/trackit"
+import { getHabits } from "../../../services/trackit"
 import { Comment, Title } from "../../common"
 import CreatedHabit from "./CreatedHabit"
 import PendingHabit from "./PendingHabit"
@@ -28,7 +28,7 @@ export default function Habits(){
         alert(`Aconteceu um erro inesperado!\nDescrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`)
         navigate("/")
       })
-  }, [refreshList])
+  }, [refreshList, navigate])
 
   return(
     <>

@@ -30,7 +30,7 @@ export default function Today(){
         navigate("/")
       })
 
-  }, [reloadHabits, setTodaysHabits])
+  }, [reloadHabits, setTodaysHabits, navigate])
 
     return(
       <>

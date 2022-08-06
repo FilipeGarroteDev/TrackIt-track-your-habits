@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Bars } from "react-loader-spinner";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import logo from "../../assets/images/big-logo.svg"
@@ -18,10 +18,15 @@ export default function SignIn(){
   const navigate = useNavigate();
   const {setUserData} = useContext(UserContext);
 
-  // if(localStorage.length > 0){
-  //   return(<Navigate to="/hoje" replace/>)
-   
-  // }
+  if(localStorage.getItem("user")){
+    setUserData(JSON.parse(localStorage.getItem("user")))
+    return(<Navigate to="/hoje" replace/>)
+    
+
+  }
+
+
+
 
 
   function handleForm(e){
@@ -41,6 +46,7 @@ export default function SignIn(){
       promise
         .then(res => {
           localStorage.setItem("hash", res.data.token)
+          localStorage.setItem("user", JSON.stringify(res.data))
           setUserData(res.data)
           navigate("/hoje")
         })
