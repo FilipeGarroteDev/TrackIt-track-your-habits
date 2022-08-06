@@ -5,7 +5,7 @@ import styled from "styled-components";
 import ProgressContext from "../../contexts/ProgressContext";
 
 export default function Menu(){
-  const { todaysHabits, checkedHabits} = useContext(ProgressContext)
+  const { todaysHabits } = useContext(ProgressContext)
 
 
 
@@ -16,7 +16,7 @@ export default function Menu(){
       </Link>
       <Link to="/hoje">
         <CircularProgressbar
-          value={(checkedHabits.length/todaysHabits.length)*100}
+          value={(todaysHabits.filter(habit => habit.done).length/todaysHabits.length)*100}
           text={<tspan dominantBaseline="middle">Hoje</tspan>}
           background
           backgroundPadding={6}

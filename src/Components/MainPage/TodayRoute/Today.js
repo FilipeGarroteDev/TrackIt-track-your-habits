@@ -11,9 +11,10 @@ import ProgressContext from "../../../contexts/ProgressContext"
 
 export default function Today(){
   dayjs.extend(updateLocale)
-  dayjs.updateLocale('pt-br', {weekdays: ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado-feira"]})
+  dayjs.updateLocale('pt-br', {weekdays: ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"]})
   const date = dayjs().locale("pt-br").format("dddd, DD/MM");
-  const {todaysHabits, setTodaysHabits, checkedHabits} = useContext(ProgressContext)
+  const {todaysHabits, setTodaysHabits} = useContext(ProgressContext)
+  const [reloadHabits, setReloadHabits] = useState(false)
 
   useEffect(() => {
     const promise = getTodayHabits();
@@ -27,21 +28,21 @@ export default function Today(){
         )
       })
 
-  }, [])
+  }, [reloadHabits, setTodaysHabits])
 
     return(
       <>
-        <TitleContainer checkedHabits={checkedHabits}>
+        <TitleContainer checkedHabits={todaysHabits.filter(habit => habit.done)}>
           <Title>{date}</Title>
-          {checkedHabits.length === 0 ? <h3>Nenhum hábito concluído ainda</h3> : <h3>{`${(checkedHabits.length/todaysHabits.length)*100}% dos hábitos concluídos`}</h3>}
+          {todaysHabits.filter(habit => habit.done === true).length === 0 ? <h3>Nenhum hábito concluído ainda</h3> : <h3>{`${(todaysHabits.filter(habit => habit.done).length/todaysHabits.length)*100}% dos hábitos concluídos`}</h3>}
         </TitleContainer>
         {todaysHabits.length === 0 ? 
           <Comment>Você não tem hábitos cadastrados para o dia de hoje. Descanse ou selecione o menu "Hábitos" e crie um novo hábito!</Comment>
         :
           todaysHabits.map(({name, id, done, currentSequence, highestSequence}) => done ?
-            <TodaysHabit key={id} name={name} done={done} currentSequence={currentSequence} highestSequence={highestSequence} id={id} color="#8FC549"/>
+            <TodaysHabit key={id} name={name} done={done} currentSequence={currentSequence} highestSequence={highestSequence} id={id} reloadHabits={reloadHabits} setReloadHabits={setReloadHabits} color="#8FC549"/>
           :
-            <TodaysHabit key={id} name={name} done={done} currentSequence={currentSequence} highestSequence={highestSequence} id={id}/>
+            <TodaysHabit key={id} name={name} done={done} currentSequence={currentSequence} highestSequence={highestSequence} id={id} reloadHabits={reloadHabits} setReloadHabits={setReloadHabits}/>
           )}
       </>
     )
