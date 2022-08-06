@@ -32,7 +32,9 @@ export default function Menu(){
           })}
         />      
       </Link>
-      <span>Histórico</span>
+      <Link to="/historico">
+        <span>Histórico</span>
+      </Link>
     </BottomMenu>
   )
 }

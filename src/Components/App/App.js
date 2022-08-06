@@ -4,6 +4,7 @@ import ProgressContext from "../../contexts/ProgressContext";
 import UserContext from "../../contexts/UserContext";
 import {Reset, GlobalStyle} from "../../globalStyle";
 import Habits from "../MainPage/HabitsRoute/Habits";
+import Historic from "../MainPage/Historic/Historic";
 import PrivatePage from "../MainPage/PrivatePage";
 import Today from "../MainPage/TodayRoute/Today";
 import SignIn from "../SignIn/SignIn";
@@ -32,6 +33,11 @@ export default function App(){
             <Route path="/habitos" element={
               <PrivatePage>
                 <Habits/>
+              </PrivatePage>
+            }/>
+            <Route path="/historico" element={
+              <PrivatePage>
+                <Historic/>
               </PrivatePage>
             }/>
           </Routes>
