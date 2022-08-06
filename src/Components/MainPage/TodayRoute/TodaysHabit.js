@@ -101,10 +101,8 @@ import { postCompletedHabit, postUncompletedHabit } from "../../../services/trac
 import ProgressContext from "../../../contexts/ProgressContext"
 
 
-
-
-export default function TodaysHabit({name, id, done, currentSequence, highestSequence, color, reloadHabits, setReloadHabits, ...otherProps}){
-  const {todaysHabits} = useContext(ProgressContext)
+export default function TodaysHabit({name, id, done, currentSequence, highestSequence, color}){
+  const {todaysHabits, reloadHabits, setReloadHabits} = useContext(ProgressContext)
 
   function checkHabit(){
     if(done){

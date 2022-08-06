@@ -6,6 +6,7 @@ import ProgressContext from "../../contexts/ProgressContext";
 
 export default function Menu(){
   const { todaysHabits } = useContext(ProgressContext)
+  const percent = todaysHabits.filter(habit => habit.done)
 
 
 
@@ -16,7 +17,7 @@ export default function Menu(){
       </Link>
       <Link to="/hoje">
         <CircularProgressbar
-          value={(todaysHabits.filter(habit => habit.done).length/todaysHabits.length)*100}
+          value={percent === 0 ? 0 : (percent.length/todaysHabits.length)*100}
           text={<tspan dominantBaseline="middle">Hoje</tspan>}
           background
           backgroundPadding={6}

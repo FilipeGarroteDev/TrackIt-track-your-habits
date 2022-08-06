@@ -1,12 +1,13 @@
-import { useState } from "react"
+import {  useContext, useState } from "react"
 import { Bars } from "react-loader-spinner"
 import styled from "styled-components"
-import { postHabit } from "../../../services/trackit"
-
+import ProgressContext from "../../../contexts/ProgressContext"
+import { getTodayHabits, postHabit } from "../../../services/trackit"
 
 export default function PendingHabit({setCreateHabit, refreshList, setRefreshList, habitName, setHabitName, days, setDays}){
   const week = ["D", "S", "T", "Q", "Q", "S", "S"]
   const [savedHabit, setSavedHabit] = useState(false)
+  const {setTodaysHabits} = useContext(ProgressContext)
 
   function sendHabit(){
 
@@ -26,6 +27,9 @@ export default function PendingHabit({setCreateHabit, refreshList, setRefreshLis
           setHabitName("");
           setDays([]);
           setRefreshList(!refreshList);
+          //PROMISE PARA ATUALIZAR O PROGRESSO DO BOTÃO CIRCULAR
+          const promise = getTodayHabits();
+          promise.then(res => setTodaysHabits(res.data))
         })
         .catch(res => {
           alert(`Não foi possível enviar seu hábito.Tente novamente.\nDescrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`)

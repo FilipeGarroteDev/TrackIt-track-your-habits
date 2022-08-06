@@ -1,14 +1,20 @@
 import styled from "styled-components"
-import { removeHabit } from "../../../services/trackit"
+import { getTodayHabits, removeHabit } from "../../../services/trackit"
+import ProgressContext from "../../../contexts/ProgressContext"
+import { useContext } from "react"
 
 export default function CreatedHabit({name, days, id, refreshList, setRefreshList }){
   const week = ["D", "S", "T", "Q", "Q", "S", "S"]
+  const {setTodaysHabits} = useContext(ProgressContext)
 
   function deleteHabit(){
     if(window.confirm("Você tem certeza que quer deletar esse hábito?")){
       const promise = removeHabit(id)
       promise.then(res => {
         setRefreshList(!refreshList)
+        //PROMISE PARA ATUALIZAR O PROGRESSO DO BOTÃO CIRCULAR
+        const promise = getTodayHabits();
+        promise.then(res => setTodaysHabits(res.data))
       })
     }
   }

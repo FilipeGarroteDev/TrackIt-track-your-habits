@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect } from "react"
 import dayjs from "dayjs"
 import "dayjs/locale/pt-br"
 import updateLocale from "dayjs/plugin/updateLocale"
@@ -13,8 +13,7 @@ export default function Today(){
   dayjs.extend(updateLocale)
   dayjs.updateLocale('pt-br', {weekdays: ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"]})
   const date = dayjs().locale("pt-br").format("dddd, DD/MM");
-  const {todaysHabits, setTodaysHabits} = useContext(ProgressContext)
-  const [reloadHabits, setReloadHabits] = useState(false)
+  const {todaysHabits, setTodaysHabits, reloadHabits, setReloadHabits} = useContext(ProgressContext)
 
   useEffect(() => {
     const promise = getTodayHabits();
@@ -34,7 +33,7 @@ export default function Today(){
       <>
         <TitleContainer checkedHabits={todaysHabits.filter(habit => habit.done)}>
           <Title>{date}</Title>
-          {todaysHabits.filter(habit => habit.done === true).length === 0 ? <h3>Nenhum hábito concluído ainda</h3> : <h3>{`${(todaysHabits.filter(habit => habit.done).length/todaysHabits.length)*100}% dos hábitos concluídos`}</h3>}
+          {todaysHabits.filter(habit => habit.done === true).length === 0 ? <h3>Nenhum hábito concluído ainda</h3> : <h3>{`${(Math.round(todaysHabits.filter(habit => habit.done).length/todaysHabits.length*100))}% dos hábitos concluídos`}</h3>}
         </TitleContainer>
         {todaysHabits.length === 0 ? 
           <Comment>Você não tem hábitos cadastrados para o dia de hoje. Descanse ou selecione o menu "Hábitos" e crie um novo hábito!</Comment>

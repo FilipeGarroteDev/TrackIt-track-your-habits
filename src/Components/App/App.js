@@ -11,13 +11,13 @@ import SignUp from "../SignUp/SignUp";
 
 export default function App(){
   const [userData, setUserData] = useState({})
-  const [checkedHabits, setCheckedHabits] = useState([])
   const [todaysHabits, setTodaysHabits] = useState([])
+  const [reloadHabits, setReloadHabits] = useState(false)
 
   return (
     <>
       <UserContext.Provider value={{userData, setUserData}}>
-      <ProgressContext.Provider value={{todaysHabits, setTodaysHabits, checkedHabits, setCheckedHabits}}>
+      <ProgressContext.Provider value={{todaysHabits, setTodaysHabits, reloadHabits, setReloadHabits}}>
         <Reset />
         <GlobalStyle/>
         <BrowserRouter>
@@ -26,7 +26,7 @@ export default function App(){
             <Route path="/cadastro" element={<SignUp/>}/>
             <Route path="/hoje" element={
               <PrivatePage>
-                <Today />
+                <Today/>
               </PrivatePage>
             }/>
             <Route path="/habitos" element={
