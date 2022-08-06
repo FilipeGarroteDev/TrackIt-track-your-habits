@@ -1,4 +1,4 @@
-import { useState, useContext } from "react"
+import { useContext, useState } from "react"
 import styled from "styled-components"
 import { postCompletedHabit, postUncompletedHabit } from "../../../services/trackit"
 import ProgressContext from "../../../contexts/ProgressContext"
@@ -6,39 +6,36 @@ import ProgressContext from "../../../contexts/ProgressContext"
 
 
 
-export default function TodaysHabit({name, id, done, currentSequence, highestSequence}){
-  const {todaysHabits, setTodaysHabits, checkedHabits, setCheckedHabits} = useContext(ProgressContext)
+export default function TodaysHabit({name, id, color, currentSequence, highestSequence}){
+  const {todaysHabits, checkedHabits, setCheckedHabits} = useContext(ProgressContext)
+  const [isChecked, setIsChecked] = useState(false)
 
   function checkHabit(){
-    if(done){
+    if(isChecked){
+      setIsChecked(false)
       const promise = postUncompletedHabit(todaysHabits, id);
-      console.log(id, done, todaysHabits, checkedHabits)
-
       promise.then(res => {
-        console.log(res)
         const aux = checkedHabits.filter(habit => habit === id)
         const indexAux = checkedHabits.findIndex(habit => habit === aux[0])
         const filteredHabits = checkedHabits.filter ((habit, index) => index !== indexAux)
         setCheckedHabits(filteredHabits);
-        setTodaysHabits([...todaysHabits])
       })
-        .catch(res => console.log(id, done, todaysHabits, checkedHabits))
+        .catch(res => console.log("erro"))
     } else {
+      setIsChecked(true)
       const promise = postCompletedHabit(todaysHabits, id);
       promise.then(res => {
-        console.log(res)
         setCheckedHabits([
           ...checkedHabits,
           id
         ])
-        setTodaysHabits([...todaysHabits])
       })
-        .catch(res => console.log(id, done, todaysHabits, checkedHabits))
+        .catch(res => console.log("erro"))
     }
   }
 
   return(
-    <HabitCard done={done}>
+    <HabitCard isChecked={isChecked} color={color}>
       <div>
         <HabitName>{name}</HabitName>
         <Sequences>
@@ -73,7 +70,7 @@ const HabitCard = styled.div`
   ion-icon{
     width: 87px;
     height: 87px;
-    color: ${props => props.done ? "#8FC549" : "#ebebeb"};
+    color: ${props => props.color ? "#8FC549" : "#ebebeb"};
     position: absolute;
     top: 5px;
     right: 5px;

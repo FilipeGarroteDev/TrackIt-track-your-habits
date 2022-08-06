@@ -38,7 +38,9 @@ export default function Today(){
         {todaysHabits.length === 0 ? 
           <Comment>Você não tem hábitos cadastrados para o dia de hoje. Descanse ou selecione o menu "Hábitos" e crie um novo hábito!</Comment>
         :
-          todaysHabits.map(({name, id, done, currentSequence, highestSequence}) => 
+          todaysHabits.map(({name, id, done, currentSequence, highestSequence}) => done ?
+            <TodaysHabit key={id} name={name} done={done} currentSequence={currentSequence} highestSequence={highestSequence} id={id} color="#8FC549"/>
+          :
             <TodaysHabit key={id} name={name} done={done} currentSequence={currentSequence} highestSequence={highestSequence} id={id}/>
           )}
       </>
