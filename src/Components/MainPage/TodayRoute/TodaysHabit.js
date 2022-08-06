@@ -15,24 +15,23 @@ export default function TodaysHabit({name, id, done, currentSequence, highestSeq
       console.log(id, done, todaysHabits, checkedHabits)
 
       promise.then(res => {
-        console.log(id, done, todaysHabits, checkedHabits)
+        console.log(res)
         const aux = checkedHabits.filter(habit => habit === id)
         const indexAux = checkedHabits.findIndex(habit => habit === aux[0])
         const filteredHabits = checkedHabits.filter ((habit, index) => index !== indexAux)
         setCheckedHabits(filteredHabits);
-        setTodaysHabits(todaysHabits)
+        setTodaysHabits([...todaysHabits])
       })
         .catch(res => console.log(id, done, todaysHabits, checkedHabits))
     } else {
       const promise = postCompletedHabit(todaysHabits, id);
       promise.then(res => {
-        console.log(id, done, todaysHabits, checkedHabits)
-        console.log(res.data);
+        console.log(res)
         setCheckedHabits([
           ...checkedHabits,
           id
         ])
-        setTodaysHabits(todaysHabits)
+        setTodaysHabits([...todaysHabits])
       })
         .catch(res => console.log(id, done, todaysHabits, checkedHabits))
     }

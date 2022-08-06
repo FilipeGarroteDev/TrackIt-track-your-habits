@@ -33,7 +33,7 @@ export default function Today(){
       <>
         <TitleContainer checkedHabits={checkedHabits}>
           <Title>{date}</Title>
-          {checkedHabits.length === 0 ? <h3>Nenhum hábito concluído ainda</h3> : <h3>{`${checkedHabits.length/todaysHabits.length}% dos hábitos concluídos`}</h3>}
+          {checkedHabits.length === 0 ? <h3>Nenhum hábito concluído ainda</h3> : <h3>{`${(checkedHabits.length/todaysHabits.length)*100}% dos hábitos concluídos`}</h3>}
         </TitleContainer>
         {todaysHabits.length === 0 ? 
           <Comment>Você não tem hábitos cadastrados para o dia de hoje. Descanse ou selecione o menu "Hábitos" e crie um novo hábito!</Comment>
