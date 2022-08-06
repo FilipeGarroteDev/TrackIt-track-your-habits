@@ -58,4 +58,10 @@ function postUncompletedHabit(body, id){
   return promise
 }
 
-export {postSignUpData, postLogin, postHabit, getHabits, removeHabit, getTodayHabits, postCompletedHabit, postUncompletedHabit}
+function getHistoric(){
+  const config = createToken();
+  const promise = axios.get (`${BASE_URL}/habits/history/daily`, config);
+  return promise
+}
+
+export {postSignUpData, postLogin, postHabit, getHabits, removeHabit, getTodayHabits, postCompletedHabit, postUncompletedHabit, getHistoric}

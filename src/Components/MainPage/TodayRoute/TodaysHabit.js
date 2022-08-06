@@ -39,8 +39,8 @@ export default function TodaysHabit({name, id, done, currentSequence, highestSeq
       <div>
         <HabitName>{name}</HabitName>
         <Sequences color={color} currentSequence={currentSequence} highestSequence={highestSequence}>
-          <h4>Sequência atual: <en>{currentSequence} dias</en></h4>
-          <h4>Seu recorde: <en>{highestSequence} dias</en></h4>
+          <h4>Sequência atual: <strong>{currentSequence} dias</strong></h4>
+          <h4>Seu recorde: <strong>{highestSequence} dias</strong></h4>
         </Sequences>
       </div>
       <ion-icon name="checkbox" onClick={checkHabit}></ion-icon>
@@ -89,7 +89,7 @@ const Sequences = styled.div`
     font-size: 13px;
     color: #666666;
 
-    en{
+    strong{
     color: ${props => props.color ? "#8FC549" : "#666666"};
     }
 
@@ -99,7 +99,7 @@ const Sequences = styled.div`
     font-size: 13px;
     color: #666666;
 
-    en{
+    strong{
     color: ${props => (props.currentSequence === props.highestSequence) && props.highestSequence !== 0 ? "#8FC549" : "#666666"};
     }
     

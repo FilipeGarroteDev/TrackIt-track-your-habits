@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Bars } from "react-loader-spinner";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import logo from "../../assets/images/big-logo.svg"
@@ -21,8 +21,6 @@ export default function SignIn(){
   if(localStorage.getItem("user")){
     setUserData(JSON.parse(localStorage.getItem("user")))
     return(<Navigate to="/hoje" replace/>)
-    
-
   }
 
 
