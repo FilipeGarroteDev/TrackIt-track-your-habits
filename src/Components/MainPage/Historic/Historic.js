@@ -29,7 +29,7 @@ export default function Historic(){
       const today = dayjs().format("DD/MM/YYYY");
       if(daysWithHabits.includes(calendarDay) && calendarDay !== today){
         const currentDayIndex = habitsHistoric.findIndex(day => day.day === calendarDay)
-        const hasFalse = habitsHistoric[currentDayIndex].habits.map(habit => !habit.done);
+        const hasFalse = habitsHistoric[currentDayIndex].habits.filter(habit => !habit.done);
         if(hasFalse.length === 0){
           return "successed"
         } else {
