@@ -23,12 +23,13 @@ export default function Menu(){
           background
           backgroundPadding={6}
           styles={buildStyles({
-            backgroundColor: "#3e98c7",
+            backgroundColor: "#52B6FF",
             textColor: "#fff",
             pathColor: "#fff",
             trailColor: "transparent",
             strokeLinecap: 'round',
             textSize: "18px",
+            pathTransitionDuration: 0.5,
           })}
         />      
       </Link>

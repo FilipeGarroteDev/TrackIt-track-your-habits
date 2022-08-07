@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 import ProgressContext from "../../contexts/ProgressContext";
 import UserContext from "../../contexts/UserContext";
 import {Reset, GlobalStyle} from "../../globalStyle";
+import dark from "../../themes/dark";
+import light from "../../themes/light";
 import Habits from "../MainPage/HabitsRoute/Habits";
 import Historic from "../MainPage/Historic/Historic";
 import PrivatePage from "../MainPage/PrivatePage";
@@ -17,6 +20,7 @@ export default function App(){
 
   return (
     <>
+      <ThemeProvider theme={light}>
       <UserContext.Provider value={{userData, setUserData}}>
       <ProgressContext.Provider value={{todaysHabits, setTodaysHabits, reloadHabits, setReloadHabits}}>
         <Reset />
@@ -44,6 +48,7 @@ export default function App(){
         </BrowserRouter>
       </ProgressContext.Provider>
       </UserContext.Provider>
+      </ThemeProvider>
     </>
   )
 }
