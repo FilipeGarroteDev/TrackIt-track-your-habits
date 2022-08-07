@@ -10,8 +10,9 @@ import "dayjs/locale/pt-br"
 export default function Historic(){
   const [date, setDate] = useState(new Date());
   const [habitsHistoric, setHabitsHistoric] = useState([]);
-  const [daysWithHabits, setDaysWithHabits] = useState([])
-
+  const [daysWithHabits, setDaysWithHabits] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedDay, setSelectedDay] = useState([]);
 
   useEffect(() => {
     const promise = getHistoric();
@@ -38,6 +39,20 @@ export default function Historic(){
     }
   }
 
+  function showDayInfos(date){
+    const today = dayjs().format("DD/MM/YYYY")
+    const formatedDay = dayjs(date).format("DD/MM/YYYY");
+    if(daysWithHabits.includes(formatedDay) && formatedDay !== today){
+      const aux = habitsHistoric.filter(day => day.day === formatedDay)
+      const currentDay = {
+        ...aux[0]
+      }
+      setSelectedDay(currentDay)
+      setIsOpen(true)
+      
+    }
+  }
+
   return(
     <>
       <Title>Histórico</Title>
@@ -49,8 +64,27 @@ export default function Historic(){
           date={date}
           formatDay={(locale, date) => dayjs(date).format("DD")}
           tileClassName={tileClassName}
+          onClickDay={showDayInfos}
         />
       </CalendarWrapper>
+      <OptionOverlay isOpen={isOpen}>
+        <HabitBox>
+          <h2>{`${dayjs(date).locale('pt-br').format("dddd")}, ${selectedDay.day}`}</h2>
+          {selectedDay.length === 0 ? <></> :          
+          selectedDay.habits.map(habit => habit.done ?
+            <div>
+              <h6>{habit.name}</h6>
+              <ion-icon name="checkmark-circle"></ion-icon>
+            </div>
+          :
+            <div>
+              <h6>{habit.name}</h6>
+              <ion-icon name="close-circle"></ion-icon>
+            </div>
+          )}
+          <button onClick={() => setIsOpen(false)}>Fechar</button>
+        </HabitBox>
+      </OptionOverlay>
     </>
   )
 }
@@ -102,5 +136,70 @@ const CalendarWrapper = styled.div`
   clip-path: circle();
   background-color: #EA5766;
 }
+
+`
+
+const OptionOverlay = styled.div`
+  display: ${props => props.isOpen ? 'flex' : 'none'};
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.6);
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+`
+
+const HabitBox = styled.div`
+  width: 70%;
+  height: auto;
+  background-color: #FFFFFF;
+  overflow-y: scroll;
+  border-radius: 15px;
+  border: 2px solid #126BA5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+
+  h2{
+    font-size: 23px;
+    color: #126BA5;
+    margin-bottom: 20px;
+  }
+
+  div{
+    width: 100%;
+    height: 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #c3c3c3;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+
+    ion-icon{
+      font-size: 30px;
+      color: green;
+    }
+  }
+
+  button{
+    width: 150px;
+    height: 40px;
+    border: 1px solid #126BA5;
+    background-color: #1b80c4;
+    font-size: 20px;
+    font-weight: 300;
+    color: white;
+    border-radius: 20px;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+  }
 
 `
