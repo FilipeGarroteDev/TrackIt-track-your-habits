@@ -40,7 +40,7 @@ const Reset = createGlobalStyle`
     border-collapse: collapse;
     border-spacing: 0;
   }
-`
+`;
 
 const GlobalStyle = createGlobalStyle`
 
@@ -56,7 +56,7 @@ const GlobalStyle = createGlobalStyle`
 
   body{
     font-family: 'Lexend Deca', sans-serif;
-    background-color: #E5E5E5;
+    background-color: ${props => props.theme.mainPage.primary};
   }
 
   .root{

@@ -13,6 +13,9 @@ const Form = styled.form`
     border: 1px solid #D4D4D4;
     font-size: 20px;
     outline-color: #126ba5;
+    border-radius: 5px;
+    background-color: ${props => props.theme.signPages.secundary};
+    color: ${props => props.theme.fontColor.text};
 
     &::placeholder{
       color: #dbdbdb;
@@ -22,7 +25,7 @@ const Form = styled.form`
   button{
     height: 45px;
     color: #ffffff;
-    background-color: ${props => props.loggedIn || props.wasSent ? "#86CCFF" : "#52b6ff"};
+    background-color: ${props => props.loggedIn || props.wasSent ? "#86CCFF" : props.theme.signPages.buttons};
     font-size: 20px;
     border: none;
     border-radius: 4.5px;
@@ -34,11 +37,11 @@ const Form = styled.form`
 
 const SignUpNavigation = styled.span`
   font-size: 14px;
-  color: #52b6ff;
+  color: ${props => props.theme.signPages.buttons};
   text-decoration: underline;
 
   a:visited{
-    color: #52b6ff;
+    color: ${props => props.theme.signPages.buttons};
   }`;
 
 

@@ -20,7 +20,8 @@ export default function Historic(){
       setHabitsHistoric(res.data);
       const aux = res.data.map(habit => habit.day);
       setDaysWithHabits(aux);
-    })}, []);
+    });
+  }, []);
 
   function tileClassName({date, view}){
     if(view === "month"){
@@ -33,7 +34,10 @@ export default function Historic(){
           return "successed";
         } else {
           return "failed";
-        }}}};
+        };
+      };
+    };
+  };
 
   function showDayInfos(date){
     const today = dayjs().format("DD/MM/YYYY");
@@ -44,7 +48,9 @@ export default function Historic(){
         ...aux[0]
       };
       setSelectedDay(currentDay);
-      setIsOpen(true)}};
+      setIsOpen(true)
+    };
+  };
 
   return(
     <>
@@ -78,7 +84,9 @@ export default function Historic(){
           <button onClick={() => setIsOpen(false)}>Fechar</button>
         </HabitBox>
       </OptionOverlay>
-    </>)};
+    </>
+  );
+};
 
 const CalendarWrapper = styled.div`
   display: flex;
@@ -108,25 +116,26 @@ const CalendarWrapper = styled.div`
   }
 
   .react-calendar__tile--active {
-  background: #006edc;
-  color: white;
-  clip-path: circle();
-}
+    background: #006edc;
+    color: white;
+    clip-path: circle();
+  }
 
-.react-calendar__tile--now {
-  background: #ffff76;
-  clip-path: circle();
-}
+  .react-calendar__tile--now {
+    background: #ffff76;
+    clip-path: circle();
+  }
 
-.successed{
-  clip-path: circle();
-  background-color: #8CC654;
-}
+  .successed{
+    clip-path: circle();
+    background-color: #8CC654;
+  }
 
-.failed{
-  clip-path: circle();
-  background-color: #EA5766;
-}`
+  .failed{
+    clip-path: circle();
+    background-color: #EA5766;
+  }
+`;
 
 const OptionOverlay = styled.div`
   display: ${props => props.isOpen ? 'flex' : 'none'};
@@ -139,13 +148,13 @@ const OptionOverlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 4;`;
+  z-index: 4;
+`;
 
 const HabitBox = styled.div`
   width: 70%;
   height: auto;
-  background-color: #ebe9e9;
-  overflow-y: scroll;
+  background-color: ${props => props.theme.mainPage.primary};
   border-radius: 15px;
   border: 2px solid #126BA5;
   display: flex;
@@ -153,10 +162,11 @@ const HabitBox = styled.div`
   justify-content: center;
   align-items: center;
   padding: 15px;
+  color: ${props => props.theme.fontColor.text};
 
   h2{
     font-size: 23px;
-    color: #126BA5;
+    color: ${props => props.theme.fontColor.titles};
     margin-bottom: 20px;
   }
 
@@ -166,7 +176,7 @@ const HabitBox = styled.div`
     border-radius: 8px;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
     border: 1px solid #c3c3c3;
-    background-color: #FFFFFF;
+    background-color: ${props => props.theme.mainPage.secundary};
     margin-bottom: 18px;
     display: flex;
     align-items: center;
@@ -188,4 +198,5 @@ const HabitBox = styled.div`
     color: white;
     border-radius: 20px;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
-  }`;
+  }
+`;

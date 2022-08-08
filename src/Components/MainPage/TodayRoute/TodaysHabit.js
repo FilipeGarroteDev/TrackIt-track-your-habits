@@ -29,7 +29,9 @@ export default function TodaysHabit({name, id, done, currentSequence, highestSeq
         .catch(res => {
           alert(`Aconteceu um erro inesperado!\nDescrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`);
           navigate("/");
-        })}};
+        });
+    };
+  };
 
   return(
     <HabitCard color={color}>
@@ -46,13 +48,14 @@ export default function TodaysHabit({name, id, done, currentSequence, highestSeq
       </div>
       <ion-icon name="checkbox" onClick={checkHabit}></ion-icon>
     </HabitCard>
-  )};
+  );
+};
 
 
 const HabitCard = styled.div`
   width: 100%;
   height: 94px;
-  background-color: #FFFFFF;
+  background-color: ${props => props.theme.mainPage.secundary};
   border-radius: 5px;
   padding: 13px;
   display: flex;
@@ -74,7 +77,8 @@ const HabitCard = styled.div`
     position: absolute;
     top: 5px;
     right: 5px;
-  }`;
+  }
+`;
 
 const Sequences = styled.div`
   &&{
@@ -86,22 +90,24 @@ const Sequences = styled.div`
 
   h4:nth-of-type(1){
     font-size: 13px;
-    color: #666666;
+    color: ${props => props.theme.fontColor.text};
 
     strong{
-    color: ${props => props.color ? "#8FC549" : "#666666"};
+    color: ${props => props.color ? "#8FC549" : props.theme.fontColor.text};
     }
   }
 
   h4:nth-of-type(2){
     font-size: 13px;
-    color: #666666;
+    color: ${props => props.theme.fontColor.text};
 
     strong{
-    color: ${props => (props.currentSequence === props.highestSequence) && props.highestSequence !== 0 ? "#8FC549" : "#666666"};
+    color: ${props => (props.currentSequence === props.highestSequence) && props.highestSequence !== 0 ? "#8FC549" : props.theme.fontColor.text};
     }
-  }`;
+  }
+`;
 
 const HabitName = styled.div`
   font-size: 20px;
-  color: #666666;`;
+  color: ${props => props.theme.fontColor.text};
+`;

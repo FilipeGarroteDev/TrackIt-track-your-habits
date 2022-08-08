@@ -17,10 +17,11 @@ export default function App(){
   const [userData, setUserData] = useState({});
   const [todaysHabits, setTodaysHabits] = useState([]);
   const [reloadHabits, setReloadHabits] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
 
   return (
     <>
-      <ThemeProvider theme={light}>
+      <ThemeProvider theme={isDarkTheme ? dark : light}>
       <UserContext.Provider value={{userData, setUserData}}>
       <ProgressContext.Provider value={{todaysHabits, setTodaysHabits, reloadHabits, setReloadHabits}}>
         <Reset />
@@ -50,4 +51,5 @@ export default function App(){
       </UserContext.Provider>
       </ThemeProvider>
     </>
-  )};
+  )
+};

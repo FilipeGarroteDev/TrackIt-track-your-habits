@@ -19,7 +19,8 @@ export default function SignUp(){
     setSignUpData({
       ...signUpData,
       [e.target.name]: e.target.value,
-    })};
+    });
+  };
 
   function sendForm(e){
     e.preventDefault();
@@ -38,14 +39,16 @@ export default function SignUp(){
             `Ocorreu um erro no cadastro do usuário. Favor tente novamente.\n- Descrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`
           );
           setWasSent(false);
-        })};
+        });
+    };
 
-      setSignUpData({
-        email: "",
-        name: "",
-        image: "",
-        password: "",
-      })};
+    setSignUpData({
+      email: "",
+      name: "",
+      image: "",
+      password: "",
+    });
+  };
 
   return (
     <Container>
@@ -94,5 +97,5 @@ export default function SignUp(){
         <Link to="/">Já tem uma conta? Faça login!</Link>
       </SignUpNavigation>
     </Container>
-  )
+  );
 };

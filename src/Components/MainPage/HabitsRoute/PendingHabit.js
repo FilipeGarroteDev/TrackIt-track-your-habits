@@ -44,7 +44,9 @@ export default function PendingHabit({
           alert(`Não foi possível enviar seu hábito.Tente novamente.\nDescrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`);
           setSavedHabit(false);
           navigate("/");
-        })}};
+        })
+    }
+  };
 
   return(
     <HabitCard>
@@ -65,7 +67,7 @@ export default function PendingHabit({
               days={days}
               index={index}
               savedHabit={savedHabit}
-              color="white"
+              color={"white"}
               background ="#cfcfcf"
             />
             : 
@@ -86,7 +88,8 @@ export default function PendingHabit({
           <button onClick={sendHabit}>Salvar</button>}
       </Buttons>
     </HabitCard>
-  )};
+  )
+};
 
 function Day({
   day,
@@ -113,7 +116,10 @@ function Day({
       } else {
         const indexAux = days.findIndex(value => value === aux[0]);
         const filteredDays = days.filter((value, index) => index !== indexAux);
-        setDays(filteredDays)}}};
+        setDays(filteredDays)
+      };
+    };
+  };
 
   return (
     <>
@@ -127,11 +133,12 @@ function Day({
         {day}
       </StyledDay>
     </>
-  )};
+  )
+};
 
 const HabitCard = styled.div`
   height: 180px;
-  background-color: white;
+  background-color: ${props => props.theme.mainPage.secundary};
   border-radius: 5px;
   padding: 18px;
   margin-bottom: 15px;
@@ -143,35 +150,35 @@ const HabitCard = styled.div`
     font-size: 20px;
     padding-left: 11px;
     border-radius: 5px;
-    color: #666666;
+    color: ${props => props.theme.fontColor.text};;
     margin-bottom: 8px;
+    background-color: ${props => props.theme.signPages.secundary};
 
     &::placeholder{
       color: #DBDBDB;
     }
   }
-`
+`;
 
 const WeekContainer = styled.div`
   display: flex;
   gap: 4px;
   margin-bottom: 30px;
-`
+`;
 
 const StyledDay = styled.div`
   width: 30px;
   height: 30px;
   border: 1px solid #D4D4D4;
   border-radius: 5px;
-  color: ${(props) => props.color ? props.color : "#dbdbdb"};
-  background-color: ${(props) => props.background ? props.background : "white"};
+  color: ${props => props.color ? props.theme.fontColor.weekdayNone : props => props.theme.fontColor.weekdaySelected};
+  background-color: ${props => props.color ? props.theme.mainPage.weekdayNone : props => props.theme.mainPage.weekdaySelected};
   font-size: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: ${props => props.savedHabit ? "0.5" : "initial"};
-
-`
+`;
 
 const Buttons = styled.div`
   display: flex;
@@ -196,4 +203,4 @@ const Buttons = styled.div`
     justify-content: center;
     align-items: center;
   }
-`
+`;

@@ -25,7 +25,8 @@ export default function Habits(){
       .catch(res => {
         alert(`Aconteceu um erro inesperado!\nDescrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`)
         navigate("/");
-      })}, [refreshList, navigate]);
+      })
+  }, [refreshList, navigate]);
 
   return(
     <>
@@ -55,7 +56,8 @@ export default function Habits(){
             refreshList={refreshList}
             setRefreshList={setRefreshList}/>))}
     </>
-  )}
+  )
+};
 
 const TitleContainer = styled.div`
   display: flex;
@@ -75,6 +77,6 @@ const TitleContainer = styled.div`
     border-radius: 5px;
     padding-bottom: 3px;
   }
-`
+`;
 
 

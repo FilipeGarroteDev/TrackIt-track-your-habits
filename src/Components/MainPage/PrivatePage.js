@@ -20,9 +20,11 @@ export default function PrivatePage({children}){
     return(
       <Navigate to="/" replace />
     );
-  }};
+  };
+};
 
 const Wrapper = styled.div`
   height: 100%;
   width: 100%;
-  padding: 90px 20px;`;
+  padding: 90px 20px;
+`;

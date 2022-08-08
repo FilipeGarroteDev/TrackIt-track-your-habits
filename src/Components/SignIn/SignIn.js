@@ -20,13 +20,15 @@ export default function SignIn(){
     if(localStorage.getItem("user")){
       setUserData(JSON.parse(localStorage.getItem("user")));
       navigate("/hoje");
-    }}, [setUserData, navigate]);
+    };
+  }, [setUserData, navigate]);
 
   function handleForm(e){
     setSignInData({
       ...signInData,
       [e.target.name]: e.target.value,
-    })};
+    });
+  };
 
   function sendLogin(e){
     e.preventDefault();
@@ -52,8 +54,9 @@ export default function SignIn(){
       setSignInData({
         email: "",
         password: ""
-      })
-    }};
+      });
+    };
+  };
 
   return (
     <Container>
@@ -86,6 +89,7 @@ export default function SignIn(){
         <Link to="/cadastro">Não tem uma conta? Cadastre-se!</Link>
       </SignUpNavigation>
     </Container>
-  )};
+  );
+};
 
 

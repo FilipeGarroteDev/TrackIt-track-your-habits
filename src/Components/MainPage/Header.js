@@ -19,7 +19,7 @@ export default function Header(){
       </MinimizedMenu>
       <ExpandedHeader isOpened={isOpened} userData={userData} setUserData={setUserData}/>
     </TopTitle>
-  )
+  );
 };
 
 function ExpandedHeader({isOpened, userData, setUserData}){
@@ -46,7 +46,7 @@ function ExpandedHeader({isOpened, userData, setUserData}){
       {isOpened ? <h2>Olá, {userData.name}!</h2> : <></>}
       {isOpened ? <h2 onClick={() => setToConfirm(true)}>Logout</h2> : <></>}
     </MaximizedMenu>
-  )
+  );
 };
 
 const TopTitle = styled.header`
@@ -57,7 +57,7 @@ const TopTitle = styled.header`
   justify-content: center;
   align-items: ${props => props.isOpened ? 'flex-start' : 'center'};
   padding: 0 18px;
-  background-color: #126BA5;
+  background-color: ${props => props.theme.header.background};
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
   border-bottom-left-radius: ${props => props.isOpened ? '20px' : '0'};
   border-bottom-right-radius: ${props => props.isOpened ? '20px' : '0'};
@@ -71,7 +71,7 @@ const TopTitle = styled.header`
   h1{
     font-family: 'Playball', sans-serif;
     font-size: 39px;
-    color: #FFFFFF;
+    color: ${props => props.theme.header.text};
   }
 
   img{
@@ -90,7 +90,7 @@ const TopTitle = styled.header`
   }
 
   h2{
-    color: white;
+    color: ${props => props.theme.header.text};
     font-size: 20px;
     font-weight: 500;
   }
@@ -133,7 +133,7 @@ const ConfirmBox = styled.div`
   width: 280px;
   height: 15%;
   padding: 10px;
-  background-color: #ffffffe7;
+  background-color: ${props => props.theme.header.confirmBox};
   border: 2px solid #126BA5;
   border-radius: 10px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
@@ -145,7 +145,7 @@ const ConfirmBox = styled.div`
   h5{
     font-size: 21px;
     font-weight: 500;
-    color: #126BA5;
+    color: ${props => props.theme.header.confirmTitle};
   }
 
   div{
@@ -166,5 +166,4 @@ const ConfirmBox = styled.div`
       font-weight: 500;
     }
   }
-
-`
+`;

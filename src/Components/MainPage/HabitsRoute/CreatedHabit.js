@@ -24,21 +24,27 @@ export default function CreatedHabit({name, days, id, refreshList, setRefreshLis
           alert(`Aconteceu um erro inesperado!\nDescrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`);
           navigate("/");
         });
-    }};
+    };
+  };
 
   return (
     <HabitCard>
       <HabitName>{name}</HabitName>
       <WeekContainer>
-        {week.map((day, index) => days.includes(index) ? <StyledDay key={index} selected={true}>{day}</StyledDay> : <StyledDay key={index} selected={false}>{day}</StyledDay> )}
+        {week.map((day, index) =>
+          days.includes(index) ?
+            <StyledDay key={index} selected={true}>{day}</StyledDay>
+          :
+            <StyledDay key={index} selected={false}>{day}</StyledDay>)}
       </WeekContainer>
       <ion-icon onClick={deleteHabit} name="trash-outline"></ion-icon>
     </HabitCard>
-  )};
+  )
+};
 
 const HabitCard = styled.div`
   height: 91px;
-  background-color: white;
+  background-color: ${props => props.theme.mainPage.secundary};
   border-radius: 5px;
   padding: 15px;
   display: flex;
@@ -54,20 +60,20 @@ const HabitCard = styled.div`
     position: absolute;
     top: 11px;
     right: 10px;
-    color: #666666;
+    color: ${props => props.theme.fontColor.text};
   }
-`
+`;
 
 const WeekContainer = styled.div`
   display: flex;
   gap: 4px;
   margin-bottom: 30px;
-`
+`;
 
 const HabitName = styled.h3`
   font-size: 20px;
-  color: #666666;
-`
+  color: ${props => props.theme.fontColor.text};
+`;
 
 
 const StyledDay = styled.div`
@@ -75,10 +81,16 @@ const StyledDay = styled.div`
   height: 30px;
   border: 1px solid #D4D4D4;
   border-radius: 5px;
-  color: ${(props) => props.selected ? "white" : "#dbdbdb"};
-  background-color: ${(props) => props.selected ? "#cfcfcf" : "white"};
+  color: ${(props) => props.selected ?
+    props.theme.fontColor.weekdayNone
+  :
+    props.theme.fontColor.weekdaySelected};
+  background-color: ${(props) => props.selected ?
+    props.theme.mainPage.weekdayNone
+  :
+    props.theme.mainPage.weekdaySelected};
   font-size: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;

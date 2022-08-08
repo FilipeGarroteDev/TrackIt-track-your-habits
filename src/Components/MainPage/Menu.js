@@ -9,8 +9,6 @@ export default function Menu(){
   const totalHabits = todaysHabits.length;
   const checkedHabits = todaysHabits.filter(habit => habit.done).length;
 
-
-
   return(
     <BottomMenu>
       <Link to="/habitos">
@@ -37,7 +35,8 @@ export default function Menu(){
         <span>Histórico</span>
       </Link>
     </BottomMenu>
-  )}
+  );
+};
 
 const BottomMenu = styled.footer`
   width: 100%;
@@ -46,14 +45,14 @@ const BottomMenu = styled.footer`
   justify-content: space-between;
   align-items: center;
   padding: 0 33px;
-  background-color: #FFFFFF;
+  background-color: ${props => props.theme.menu.background};
   position: fixed;
   bottom: 0;
   left: 0;
 
   span{
     font-size: 18px;
-    color: #52b6ff;
+    color: ${props => props.theme.menu.text};
   }
 
   svg{
@@ -61,4 +60,5 @@ const BottomMenu = styled.footer`
     height: 91px;
     margin-bottom: 40px;
     text-anchor: middle;
-  }`;
+  }
+`;
