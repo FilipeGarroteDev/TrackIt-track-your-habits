@@ -37,11 +37,11 @@ const Form = styled.form`
 
 const SignUpNavigation = styled.span`
   font-size: 14px;
-  color: ${props => props.theme.signPages.buttons};
+  color: ${props => props.theme.fontColor.titles};
   text-decoration: underline;
 
   a:visited{
-    color: ${props => props.theme.signPages.buttons};
+    color: ${props => props.theme.fontColor.titles};
   }`;
 
 

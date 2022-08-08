@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Title = styled.h2`
   font-size: 23px;
-  color: #126BA5;
+  color: ${props => props.theme.fontColor.titles}
 `
 
 const Comment = styled.span`

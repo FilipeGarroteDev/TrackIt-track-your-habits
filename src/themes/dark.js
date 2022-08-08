@@ -5,14 +5,14 @@ const dark = {
     buttons: "#126ba5"
   },
   mainPage: {
-    primary: "#949191",
+    primary: "#353434",
     secundary: "#747474",
     weekdayNone: "#bbb8b8",
     weekdaySelected: "#747474",
   },
   header: {
     background: "#3b3b3b",
-    text: "#126BA5",
+    text: "#52b6ff",
     confirmBox: "#949191",
     confirmTitle: "#FFFFFF",
   },
@@ -23,7 +23,7 @@ const dark = {
   fontColor: {
     weekdaySelected: "#FFFFFF",
     weekdayNone: "#FFFFFF",
-    titles: "#126ba5",
+    titles: "#52b6ff",
     subtitles: "#FFFFFF",
     text: "#FFFFFF",
   },
