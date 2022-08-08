@@ -5,6 +5,7 @@ import logo from "../../assets/images/big-logo.svg";
 import UserContext from "../../contexts/UserContext";
 import { postLogin } from "../../services/trackit";
 import { Form, SignUpNavigation, Container } from "../../common";
+import ThemeSwitcher from "../ThemeSwitcher";
 
 export default function SignIn(){
  
@@ -60,6 +61,7 @@ export default function SignIn(){
 
   return (
     <Container>
+      <ThemeSwitcher/>
       <img src={logo} alt="logo"/>
       <Form onSubmit={sendLogin} loggedIn={loggedIn}>
         <input

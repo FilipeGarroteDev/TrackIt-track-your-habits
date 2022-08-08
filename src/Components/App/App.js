@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "styled-components";
+import { ThemeContext, ThemeProvider } from "styled-components";
 import ProgressContext from "../../contexts/ProgressContext";
 import UserContext from "../../contexts/UserContext";
 import {Reset, GlobalStyle} from "../../globalStyle";
@@ -17,12 +17,12 @@ export default function App(){
   const [userData, setUserData] = useState({});
   const [todaysHabits, setTodaysHabits] = useState([]);
   const [reloadHabits, setReloadHabits] = useState(false);
-  const [isDarkTheme, setIsDarkTheme] = useState(true);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   return (
     <>
       <ThemeProvider theme={isDarkTheme ? dark : light}>
-      <UserContext.Provider value={{userData, setUserData}}>
+      <UserContext.Provider value={{userData, setUserData, isDarkTheme, setIsDarkTheme}}>
       <ProgressContext.Provider value={{todaysHabits, setTodaysHabits, reloadHabits, setReloadHabits}}>
         <Reset />
         <GlobalStyle/>

@@ -8,7 +8,7 @@ const Title = styled.h2`
 
 const Comment = styled.span`
   font-size: 18px;
-  color: #666666;
+  color: ${props => props.theme.fontColor.text};
   display: block;
   margin-top: 30px;
 `

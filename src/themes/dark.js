@@ -7,7 +7,6 @@ const dark = {
   mainPage: {
     primary: "#949191",
     secundary: "#747474",
-    text: "#FFFFFF",
     weekdayNone: "#bbb8b8",
     weekdaySelected: "#747474",
   },
@@ -27,8 +26,14 @@ const dark = {
     titles: "#126ba5",
     subtitles: "#FFFFFF",
     text: "#FFFFFF",
-    secundary: "#52B6FF",
-  }
+  },
+  themeContainer: {
+    background: "#f5f5f5",
+    buttonOn: "#FFFFFF",
+    buttonOff: "#747474",
+    textOn: "#747474",
+    textOff: "#FFFFFF",
+  },
 }
 
-export default dark
+export default dark;

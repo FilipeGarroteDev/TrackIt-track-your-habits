@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/big-logo.svg";
 import { postSignUpData } from "../../services/trackit";
 import { Form, SignUpNavigation, Container } from "../../common";
+import ThemeSwitcher from "../ThemeSwitcher";
 
 export default function SignUp(){
   const navigate = useNavigate();
@@ -52,6 +53,7 @@ export default function SignUp(){
 
   return (
     <Container>
+      <ThemeSwitcher/>
       <img src={logo} alt="logo"/>
       <Form onSubmit={sendForm} wasSent={wasSent}>
         <input

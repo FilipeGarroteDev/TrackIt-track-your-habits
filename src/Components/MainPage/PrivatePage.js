@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import styled from "styled-components";
 import UserContext from "../../contexts/UserContext";
+import ThemeSwitcher from "../ThemeSwitcher";
 import Header from "./Header";
 import Menu from "./Menu";
 
@@ -12,6 +13,7 @@ export default function PrivatePage({children}){
     return(
       <Wrapper>
         <Header />
+        <ThemeSwitcher/>
         {children}
         <Menu />
       </Wrapper>

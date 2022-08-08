@@ -7,10 +7,8 @@ const light = {
   mainPage: {
     primary: "#e5e5e5",
     secundary: "#FFFFFF",
-    terciary: "#126ba5",
-    text: "#666666",
-    weekdayNone: "#FFFFFF",
-    weekdaySelected: "#cfcfcf",
+    weekdayNone: "#cfcfcf",
+    weekdaySelected: "#FFFFFF",
   },
   header: {
     background: "#126BA5",
@@ -23,13 +21,19 @@ const light = {
     text: "#52b6ff"
   },
   fontColor: {
-    weekdaySelected: "#FFFFFF",
-    weekdayNone: "#dbdbdb",
+    weekdaySelected: "#dbdbdb",
+    weekdayNone: "#FFFFFF",
     titles: "#126ba5",
     subtitles: "#bababa",
     text: "#666666",
-    secundary: "#52B6FF",
-  }
+  },
+  themeContainer: {
+    background: "#f5f5f5",
+    buttonOn: "#747474",
+    buttonOff: "#FFFFFF",
+    textOn: "#FFFFFF",
+    textOff: "#747474",
+  },
 }
 
-export default light
+export default light;
