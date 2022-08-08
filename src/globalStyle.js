@@ -52,6 +52,10 @@ const GlobalStyle = createGlobalStyle`
 
   a{
     color: #52b6ff;
+
+    &:visited{
+      color: #52b6ff;
+    }
   }
 
   body{
