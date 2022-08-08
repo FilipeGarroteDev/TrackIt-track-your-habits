@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ThemeContext, ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 import ProgressContext from "../../contexts/ProgressContext";
 import UserContext from "../../contexts/UserContext";
 import {Reset, GlobalStyle} from "../../globalStyle";
