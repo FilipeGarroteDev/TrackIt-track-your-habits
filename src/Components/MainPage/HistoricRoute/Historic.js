@@ -1,4 +1,4 @@
-import { Title } from "../../common";
+import { Title } from "../../../common";
 import Calendar from "react-calendar";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -64,13 +64,13 @@ export default function Historic(){
         <HabitBox>
           <h2>{`${dayjs(date).locale('pt-br').format("dddd")}, ${selectedDay.day}`}</h2>
           {selectedDay.length === 0 ? <></> :
-            selectedDay.habits.map(habit => habit.done ?
-              <div>
+            selectedDay.habits.map((habit, index) => habit.done ?
+              <div key={index}>
                 <h6>{habit.name}</h6>
                 <ion-icon name="checkmark-circle" style={{color: "green"}}></ion-icon>
               </div>
             :
-              <div>
+              <div key={index}>
                 <h6>{habit.name}</h6>
                 <ion-icon name="close-circle" style={{color: "red"}}></ion-icon>
               </div>

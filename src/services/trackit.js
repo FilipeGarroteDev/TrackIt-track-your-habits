@@ -64,4 +64,14 @@ function getHistoric(){
   return promise;
 };
 
-export {postSignUpData, postLogin, postHabit, getHabits, removeHabit, getTodayHabits, postCompletedHabit, postUncompletedHabit, getHistoric};
+export {
+  postSignUpData,
+  postLogin,
+  postHabit,
+  getHabits,
+  removeHabit,
+  getTodayHabits,
+  postCompletedHabit,
+  postUncompletedHabit,
+  getHistoric
+};

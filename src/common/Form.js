@@ -12,7 +12,7 @@ const Form = styled.form`
     padding: 10px;
     border: 1px solid #D4D4D4;
     font-size: 20px;
-
+    outline-color: #126ba5;
 
     &::placeholder{
       color: #dbdbdb;
@@ -30,8 +30,7 @@ const Form = styled.form`
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-`
+  }`;
 
 const SignUpNavigation = styled.span`
   font-size: 14px;
@@ -40,8 +39,7 @@ const SignUpNavigation = styled.span`
 
   a:visited{
     color: #52b6ff;
-  }
-`
+  }`;
 
 
 export {Form, SignUpNavigation};

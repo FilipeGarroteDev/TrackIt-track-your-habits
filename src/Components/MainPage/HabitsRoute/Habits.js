@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getHabits } from "../../../services/trackit";
-import { Comment, Title } from "../../common";
+import { Comment, Title } from "../../../common";
 import CreatedHabit from "./CreatedHabit";
 import PendingHabit from "./PendingHabit";
 

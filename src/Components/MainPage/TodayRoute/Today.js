@@ -4,7 +4,7 @@ import "dayjs/locale/pt-br";
 import updateLocale from "dayjs/plugin/updateLocale";
 import styled from "styled-components";
 import { getTodayHabits } from "../../../services/trackit";
-import { Comment, Title } from "../../common";
+import { Comment, Title } from "../../../common";
 import TodaysHabit from "./TodaysHabit";
 import ProgressContext from "../../../contexts/ProgressContext";
 import { useNavigate } from "react-router-dom";
