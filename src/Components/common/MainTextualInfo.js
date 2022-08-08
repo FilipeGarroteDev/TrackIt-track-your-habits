@@ -13,4 +13,4 @@ const Comment = styled.span`
   margin-top: 30px;
 `
 
-export {Title, Comment}
+export {Title, Comment};

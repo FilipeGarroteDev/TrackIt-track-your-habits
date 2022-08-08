@@ -5,9 +5,9 @@ import styled from "styled-components";
 import ProgressContext from "../../contexts/ProgressContext";
 
 export default function Menu(){
-  const { todaysHabits } = useContext(ProgressContext)
-  const totalHabits = todaysHabits.length
-  const checkedHabits = todaysHabits.filter(habit => habit.done).length
+  const { todaysHabits } = useContext(ProgressContext);
+  const totalHabits = todaysHabits.length;
+  const checkedHabits = todaysHabits.filter(habit => habit.done).length;
 
 
 
@@ -37,8 +37,7 @@ export default function Menu(){
         <span>Histórico</span>
       </Link>
     </BottomMenu>
-  )
-}
+  )}
 
 const BottomMenu = styled.footer`
   width: 100%;
@@ -62,7 +61,4 @@ const BottomMenu = styled.footer`
     height: 91px;
     margin-bottom: 40px;
     text-anchor: middle;
-  }
-
-
-`
+  }`;

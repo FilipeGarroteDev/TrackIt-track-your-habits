@@ -1,52 +1,52 @@
-
-import { useContext } from "react"
-import styled from "styled-components"
-import { postCompletedHabit, postUncompletedHabit } from "../../../services/trackit"
-import ProgressContext from "../../../contexts/ProgressContext"
-import { useNavigate } from "react-router-dom"
+import { useContext } from "react";
+import styled from "styled-components";
+import { postCompletedHabit, postUncompletedHabit } from "../../../services/trackit";
+import ProgressContext from "../../../contexts/ProgressContext";
+import { useNavigate } from "react-router-dom";
 
 
 export default function TodaysHabit({name, id, done, currentSequence, highestSequence, color}){
-  const {todaysHabits, reloadHabits, setReloadHabits} = useContext(ProgressContext)
-  const navigate = useNavigate()
+  const {todaysHabits, reloadHabits, setReloadHabits} = useContext(ProgressContext);
+  const navigate = useNavigate();
 
   function checkHabit(){
     if(done){
       const promise = postUncompletedHabit(todaysHabits, id);
       promise
-        .then(res => {
-          setReloadHabits(!reloadHabits)
+        .then(() => {
+          setReloadHabits(!reloadHabits);
         })
         .catch(res => {
-          alert(`Aconteceu um erro inesperado!\nDescrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`)
-          navigate("/")
-        })
+          alert(`Aconteceu um erro inesperado!\nDescrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`);
+          navigate("/");
+        });
     } else {
       const promise = postCompletedHabit(todaysHabits, id);
       promise
         .then(res => {
-          setReloadHabits(!reloadHabits)
+          setReloadHabits(!reloadHabits);
         })
         .catch(res => {
-          alert(`Aconteceu um erro inesperado!\nDescrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`)
-          navigate("/")
-        })
-    }
-  }
+          alert(`Aconteceu um erro inesperado!\nDescrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`);
+          navigate("/");
+        })}};
 
   return(
     <HabitCard color={color}>
       <div>
         <HabitName>{name}</HabitName>
-        <Sequences color={color} currentSequence={currentSequence} highestSequence={highestSequence}>
+        <Sequences 
+          color={color}
+          currentSequence={currentSequence}
+          highestSequence={highestSequence}
+        >
           <h4>Sequência atual: <strong>{currentSequence} dias</strong></h4>
           <h4>Seu recorde: <strong>{highestSequence} dias</strong></h4>
         </Sequences>
       </div>
       <ion-icon name="checkbox" onClick={checkHabit}></ion-icon>
     </HabitCard>
-  )
-}
+  )};
 
 
 const HabitCard = styled.div`
@@ -74,8 +74,7 @@ const HabitCard = styled.div`
     position: absolute;
     top: 5px;
     right: 5px;
-  }
-`
+  }`;
 
 const Sequences = styled.div`
   &&{
@@ -92,7 +91,6 @@ const Sequences = styled.div`
     strong{
     color: ${props => props.color ? "#8FC549" : "#666666"};
     }
-
   }
 
   h4:nth-of-type(2){
@@ -102,11 +100,8 @@ const Sequences = styled.div`
     strong{
     color: ${props => (props.currentSequence === props.highestSequence) && props.highestSequence !== 0 ? "#8FC549" : "#666666"};
     }
-    
-  }
+  }`;
 
-`
 const HabitName = styled.div`
   font-size: 20px;
-  color: #666666;
-`
+  color: #666666;`;

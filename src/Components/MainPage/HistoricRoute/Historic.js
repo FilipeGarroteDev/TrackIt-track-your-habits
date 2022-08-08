@@ -1,11 +1,11 @@
-import { Comment, Title } from "../../common"
+import { Title } from "../../common";
 import Calendar from "react-calendar";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import 'react-calendar/dist/Calendar.css';
 import { getHistoric } from "../../../services/trackit";
-import dayjs from "dayjs"
-import "dayjs/locale/pt-br"
+import dayjs from "dayjs";
+import "dayjs/locale/pt-br";
 
 export default function Historic(){
   const [date, setDate] = useState(new Date());
@@ -17,50 +17,43 @@ export default function Historic(){
   useEffect(() => {
     const promise = getHistoric();
     promise.then(res => {
-      setHabitsHistoric(res.data)
-      const aux = res.data.map(habit => habit.day)
-      setDaysWithHabits(aux)
-    })
-  }, [])
+      setHabitsHistoric(res.data);
+      const aux = res.data.map(habit => habit.day);
+      setDaysWithHabits(aux);
+    })}, []);
 
   function tileClassName({date, view}){
     if(view === "month"){
       const calendarDay = dayjs(date).format("DD/MM/YYYY");
       const today = dayjs().format("DD/MM/YYYY");
       if(daysWithHabits.includes(calendarDay) && calendarDay !== today){
-        const currentDayIndex = habitsHistoric.findIndex(day => day.day === calendarDay)
+        const currentDayIndex = habitsHistoric.findIndex(day => day.day === calendarDay);
         const hasFalse = habitsHistoric[currentDayIndex].habits.filter(habit => !habit.done);
         if(hasFalse.length === 0){
-          return "successed"
+          return "successed";
         } else {
-          return "failed"
-        }
-      }
-    }
-  }
+          return "failed";
+        }}}};
 
   function showDayInfos(date){
-    const today = dayjs().format("DD/MM/YYYY")
+    const today = dayjs().format("DD/MM/YYYY");
     const formatedDay = dayjs(date).format("DD/MM/YYYY");
     if(daysWithHabits.includes(formatedDay) && formatedDay !== today){
-      const aux = habitsHistoric.filter(day => day.day === formatedDay)
+      const aux = habitsHistoric.filter(day => day.day === formatedDay);
       const currentDay = {
         ...aux[0]
-      }
-      setSelectedDay(currentDay)
-      setIsOpen(true)
-      
-    }
-  }
+      };
+      setSelectedDay(currentDay);
+      setIsOpen(true)}};
 
   return(
     <>
       <Title>Histórico</Title>
       <CalendarWrapper>
-        <Calendar 
+        <Calendar
           calendarType="US"
-          locale="pt-br" 
-          onChange={setDate} 
+          locale="pt-br"
+          onChange={setDate}
           date={date}
           formatDay={(locale, date) => dayjs(date).format("DD")}
           tileClassName={tileClassName}
@@ -70,24 +63,22 @@ export default function Historic(){
       <OptionOverlay isOpen={isOpen}>
         <HabitBox>
           <h2>{`${dayjs(date).locale('pt-br').format("dddd")}, ${selectedDay.day}`}</h2>
-          {selectedDay.length === 0 ? <></> :          
-          selectedDay.habits.map(habit => habit.done ?
-            <div>
-              <h6>{habit.name}</h6>
-              <ion-icon name="checkmark-circle"></ion-icon>
-            </div>
-          :
-            <div>
-              <h6>{habit.name}</h6>
-              <ion-icon name="close-circle"></ion-icon>
-            </div>
-          )}
+          {selectedDay.length === 0 ? <></> :
+            selectedDay.habits.map(habit => habit.done ?
+              <div>
+                <h6>{habit.name}</h6>
+                <ion-icon name="checkmark-circle" style={{color: "green"}}></ion-icon>
+              </div>
+            :
+              <div>
+                <h6>{habit.name}</h6>
+                <ion-icon name="close-circle" style={{color: "red"}}></ion-icon>
+              </div>
+            )}
           <button onClick={() => setIsOpen(false)}>Fechar</button>
         </HabitBox>
       </OptionOverlay>
-    </>
-  )
-}
+    </>)};
 
 const CalendarWrapper = styled.div`
   display: flex;
@@ -135,9 +126,7 @@ const CalendarWrapper = styled.div`
 .failed{
   clip-path: circle();
   background-color: #EA5766;
-}
-
-`
+}`
 
 const OptionOverlay = styled.div`
   display: ${props => props.isOpen ? 'flex' : 'none'};
@@ -150,13 +139,12 @@ const OptionOverlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 4;
-`
+  z-index: 4;`;
 
 const HabitBox = styled.div`
   width: 70%;
   height: auto;
-  background-color: #FFFFFF;
+  background-color: #ebe9e9;
   overflow-y: scroll;
   border-radius: 15px;
   border: 2px solid #126BA5;
@@ -178,6 +166,7 @@ const HabitBox = styled.div`
     border-radius: 8px;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
     border: 1px solid #c3c3c3;
+    background-color: #FFFFFF;
     margin-bottom: 18px;
     display: flex;
     align-items: center;
@@ -186,7 +175,6 @@ const HabitBox = styled.div`
 
     ion-icon{
       font-size: 30px;
-      color: green;
     }
   }
 
@@ -200,6 +188,4 @@ const HabitBox = styled.div`
     color: white;
     border-radius: 20px;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
-  }
-
-`
+  }`;

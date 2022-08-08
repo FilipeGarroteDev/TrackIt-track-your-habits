@@ -3,4 +3,4 @@ import { Form, SignUpNavigation } from "./Form";
 import { Comment, Title } from "./MainTextualInfo";
 
 
-export {Container, Form, SignUpNavigation, Comment, Title}
+export {Container, Form, SignUpNavigation, Comment, Title};

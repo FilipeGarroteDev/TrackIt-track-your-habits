@@ -1,74 +1,107 @@
-import {  useContext, useState } from "react"
-import { Bars } from "react-loader-spinner"
-import { useNavigate } from "react-router-dom"
-import styled from "styled-components"
-import ProgressContext from "../../../contexts/ProgressContext"
-import { getTodayHabits, postHabit } from "../../../services/trackit"
+import {  useContext, useState } from "react";
+import { Bars } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import ProgressContext from "../../../contexts/ProgressContext";
+import { getTodayHabits, postHabit } from "../../../services/trackit";
 
-export default function PendingHabit({setCreateHabit, refreshList, setRefreshList, habitName, setHabitName, days, setDays}){
-  const week = ["D", "S", "T", "Q", "Q", "S", "S"]
-  const [savedHabit, setSavedHabit] = useState(false)
-  const {setTodaysHabits} = useContext(ProgressContext)
-  const navigate = useNavigate()
+export default function PendingHabit({
+  setCreateHabit,
+  refreshList,
+  setRefreshList,
+  habitName,
+  setHabitName,
+  days,
+  setDays
+}){
+  const week = ["D", "S", "T", "Q", "Q", "S", "S"];
+  const [savedHabit, setSavedHabit] = useState(false);
+  const {setTodaysHabits} = useContext(ProgressContext);
+  const navigate = useNavigate();
 
   function sendHabit(){
 
     if (days.length === 0){
-      alert("Você precisa selecionar pelo menos um dia da semana.")
+      alert("Você precisa selecionar pelo menos um dia da semana.");
     } else {
-      setSavedHabit(true)
+      setSavedHabit(true);
       const habitObject = {
         name: habitName,
         days
-      }
-
+      };
       const promise = postHabit(habitObject);
       promise
-        .then(res => {
+        .then(() => {
           setCreateHabit(false);
           setHabitName("");
           setDays([]);
           setRefreshList(!refreshList);
           //PROMISE PARA ATUALIZAR O PROGRESSO DO BOTÃO CIRCULAR
           const promise = getTodayHabits();
-          promise.then(res => setTodaysHabits(res.data))
+          promise.then(res => setTodaysHabits(res.data));
         })
         .catch(res => {
-          alert(`Não foi possível enviar seu hábito.Tente novamente.\nDescrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`)
-          setSavedHabit(false)
-          navigate("/")
-        })
-    }    
-  }
-
+          alert(`Não foi possível enviar seu hábito.Tente novamente.\nDescrição: ${res.response.data.details ? res.response.data.details[0] : res.response.data.message}`);
+          setSavedHabit(false);
+          navigate("/");
+        })}};
 
   return(
     <HabitCard>
-      <input 
-        type="text" 
+      <input
+        type="text"
         placeholder="nome do hábito"
         value={habitName}
         onChange={e => setHabitName(e.target.value)}
         disabled={savedHabit ? true : false}
       />
       <WeekContainer>
-        {week.map((day, index) => days.includes(index) ? <Day key={index} day={day} setDays={setDays} days={days} index={index} savedHabit={savedHabit} color="white" background ="#cfcfcf"/> : <Day key={index} day={day} setDays={setDays} days={days} index={index} savedHabit={savedHabit}/>)}
+        {week.map((day, index) =>
+          days.includes(index) ?
+            <Day
+              key={index}
+              day={day}
+              setDays={setDays}
+              days={days}
+              index={index}
+              savedHabit={savedHabit}
+              color="white"
+              background ="#cfcfcf"
+            />
+            : 
+            <Day
+              key={index}
+              day={day}
+              setDays={setDays}
+              days={days}
+              index={index}
+              savedHabit={savedHabit}
+            />)}
       </WeekContainer>
       <Buttons savedHabit={savedHabit}>
         <span onClick={() => {setCreateHabit(false)}}>Cancelar</span>
-        {savedHabit ? <button><Bars width={30} color="white" /></button> : <button onClick={sendHabit}>Salvar</button>}
-
+        {savedHabit ?
+          <button><Bars width={30} color="white" /></button>
+        :
+          <button onClick={sendHabit}>Salvar</button>}
       </Buttons>
     </HabitCard>
-  )
-}
+  )};
 
-function Day({day, setDays, days, index, savedHabit, color, background}){
-  const [isClicked, setIsClicked] = useState(false)
+function Day({
+  day,
+  setDays,
+  days,
+  index,
+  savedHabit,
+  color,
+  background
+}){
+  const [isClicked, setIsClicked] = useState(false);
 
   function handleDays(){
-    const aux = days.filter(value => value === index)
-    setIsClicked(!isClicked)
+    const aux = days.filter(value => value === index);
+    setIsClicked(!isClicked);
 
     if(!savedHabit){
       if(!color){
@@ -76,23 +109,25 @@ function Day({day, setDays, days, index, savedHabit, color, background}){
           setDays([
             ...days,
             index
-          ])
-        }
+          ])};
       } else {
         const indexAux = days.findIndex(value => value === aux[0]);
-        const filteredDays = days.filter((value, index) => index !== indexAux)
-        setDays(filteredDays)
-      }
-    }
-  }
+        const filteredDays = days.filter((value, index) => index !== indexAux);
+        setDays(filteredDays)}}};
 
   return (
     <>
-      <StyledDay color={color} background={background} isClicked={isClicked} savedHabit={savedHabit} onClick={handleDays}>{day}</StyledDay>
+      <StyledDay
+        color={color}
+        background={background}
+        isClicked={isClicked}
+        savedHabit={savedHabit}
+        onClick={handleDays}
+      >
+        {day}
+      </StyledDay>
     </>
-  )
-
-}
+  )};
 
 const HabitCard = styled.div`
   height: 180px;

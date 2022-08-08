@@ -4,28 +4,30 @@ import styled from "styled-components";
 import UserContext from "../../contexts/UserContext";
 
 export default function Header(){
-  const {setUserData, userData} = useContext(UserContext)
-  const [isOpened, setIsOpened] = useState(false)
+  const {setUserData, userData} = useContext(UserContext);
+  const [isOpened, setIsOpened] = useState(false);
   const navigate = useNavigate();
 
   return(
     <TopTitle isOpened={isOpened}>
       <MinimizedMenu>
         <h1>TrackIt</h1>
-        {isOpened ? <ion-icon name="chevron-up-circle-outline" onClick={() => setIsOpened(!isOpened)}></ion-icon> : <ion-icon name="chevron-down-circle-outline" onClick={() => setIsOpened(!isOpened)}></ion-icon>}
-        <img src={userData.image} alt="Profile"/>
+        {isOpened ?
+          <ion-icon name="chevron-up-circle-outline" onClick={() => setIsOpened(!isOpened)}></ion-icon>
+        :
+          <ion-icon name="chevron-down-circle-outline" onClick={() => setIsOpened(!isOpened)}></ion-icon>}
+        <img src={userData.image} alt="Profile" onClick={() => setIsOpened(!isOpened)}/>
       </MinimizedMenu>
       <MaximizedMenu>
         {isOpened ? <h2>Olá, {userData.name}! :)</h2> : <></>}
         {isOpened ? <h2 onClick={() => {
           localStorage.clear();
           setUserData([]);
-          navigate("/")
+          navigate("/");
         }}>Logout</h2> : <></>}
       </MaximizedMenu>
     </TopTitle>
-  )
-}
+  )};
 
 const TopTitle = styled.header`
   width: 100%;
@@ -40,7 +42,7 @@ const TopTitle = styled.header`
   position: fixed;
   top: 0;
   left: 0;
-  transition: all 0.5s;
+  transition: all 0.3s;
   z-index: 3;
   gap: 20px;
 
@@ -73,9 +75,7 @@ const TopTitle = styled.header`
 
   h2:nth-of-type(2){
     text-decoration: underline;
-  }
-
-`
+  }`;
 
 const MinimizedMenu = styled.div`
   width: 100%;
@@ -83,15 +83,11 @@ const MinimizedMenu = styled.div`
   display: flex;
   padding-top: 18px;
   justify-content: space-between;
-  align-items: center;
-
-`
+  align-items: center;`;
 
 const MaximizedMenu = styled.div`
   width: 100%;
   height: auto;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-
-`
+  align-items: center;`;

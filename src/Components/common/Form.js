@@ -44,4 +44,4 @@ const SignUpNavigation = styled.span`
 `
 
 
-export {Form, SignUpNavigation}
+export {Form, SignUpNavigation};

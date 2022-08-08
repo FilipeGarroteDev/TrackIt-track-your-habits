@@ -7,16 +7,16 @@ import {Reset, GlobalStyle} from "../../globalStyle";
 import dark from "../../themes/dark";
 import light from "../../themes/light";
 import Habits from "../MainPage/HabitsRoute/Habits";
-import Historic from "../MainPage/Historic/Historic";
+import Historic from "../MainPage/HistoricRoute/Historic";
 import PrivatePage from "../MainPage/PrivatePage";
 import Today from "../MainPage/TodayRoute/Today";
 import SignIn from "../SignIn/SignIn";
 import SignUp from "../SignUp/SignUp";
 
 export default function App(){
-  const [userData, setUserData] = useState({})
-  const [todaysHabits, setTodaysHabits] = useState([])
-  const [reloadHabits, setReloadHabits] = useState(false)
+  const [userData, setUserData] = useState({});
+  const [todaysHabits, setTodaysHabits] = useState([]);
+  const [reloadHabits, setReloadHabits] = useState(false);
 
   return (
     <>
@@ -50,5 +50,4 @@ export default function App(){
       </UserContext.Provider>
       </ThemeProvider>
     </>
-  )
-}
+  )};
