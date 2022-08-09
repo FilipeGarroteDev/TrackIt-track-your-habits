@@ -93,7 +93,7 @@ export default function SignUp(){
         {wasSent ?
           <button><Bars heigth={40} width={40} color="white" /></button>
         :
-          <button>Entrar</button>}
+          <button>Cadastrar</button>}
       </Form>
       <SignUpNavigation>
         <Link to="/">Já tem uma conta? Faça login!</Link>
