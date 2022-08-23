@@ -3,7 +3,7 @@
 TrackIt is the best way to track your own habits. An easy to use routine manager that you can create, delete and manage your daily habits as well as check which days you achieved your goals. 
 
 
-<img src="/src/assets/images/TrackIt.gif" />
+<img align="center" src="/src/assets/images/TrackIt.gif" />
 
 Try it out now at https://projeto10-trackit-steel-delta.vercel.app/
 
