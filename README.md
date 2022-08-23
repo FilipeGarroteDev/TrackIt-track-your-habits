@@ -39,7 +39,7 @@ The following tools and frameworks were used in the construction of the project:
 ## How to run
 
 1. Clone this repository
-2. Clone the repository at https://github.com/my-user/my-project-backend
+2. Clone the repository at https://github.com/FilipeGarroteDev/TrackIt-track-your-habits
 3. Install dependencies
 ```bash
 npm i
