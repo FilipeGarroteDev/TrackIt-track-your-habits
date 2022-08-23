@@ -32,7 +32,7 @@ The following tools and frameworks were used in the construction of the project:
   <img style='margin: 5px;' src="https://img.shields.io/badge/react_route%20-%2320232a.svg?&style=for-the-badge&logo=react&logoColor=%2361DAFB"/>
   <img style='margin: 5px;' src="https://img.shields.io/badge/react-context%20api%20-%2320232a.svg?&style=for-the-badge&logo=react"/>
   <img style='margin: 5px;' src="https://img.shields.io/badge/react-day%20js%20-%2320232a.svg?&style=for-the-badge&logo=react"/>
-  <img style='margin: 5px;' src="https://img.shields.io/badge/react-react-calendar%20-%2320232a.svg?&style=for-the-badge&logo=react"/>
+  <img style='margin: 5px;' src="https://img.shields.io/badge/react-react%20calendar%20-%2320232a.svg?&style=for-the-badge&logo=react"/>
 </p>
 
 ## How to run
