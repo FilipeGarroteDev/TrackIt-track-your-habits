@@ -10,7 +10,7 @@ Try it out now at https://projeto10-trackit-steel-delta.vercel.app/
 
 ## About
 
-This is an web application with which lots of people can manage their own habits. Below are the implemented features:
+This is an web application to mobile dispositives with which lots of people can manage their own habits. Below are the implemented features:
 
 - Sign Up
 - Login
